@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">AdWork</string>
+    <string name="retry">Retry</string>
+    <string name="check_your_internet">Please check your internet connection and try again</string>
+    <string name="welcome_to_adwork">Welcome to AdWork. Earn Money by watching and rating Videos and Ads</string>
+    <string name="more_watch">Watch and rate Videos and get Paid!</string>
+    <string name="into_2_string">All payments are done every 10th of the following Month</string>
+    <string name="online_payments">Payments are done online through Paypal. Ensure you have a working Paypal account to receive payments</string>
+    <string name="welcome_enjoy">The more you watch and rate, the more you get to earn</string>
+    <string name="all_shopping_delivered">Enjoy! Have fun making your dreams come true</string>
+    <string name="login">Start Earning</string>
+    <string name="username_terms">Your username only applies to this device and is not used for login purposes</string>
+    <string name="choose_your_username">Choose your username</string>
+    <string name="watch_ad">Watch and rate Video</string>
+    <string name="watch_more_ads_to_earn_points">Watch and rate more Videos to earn points.\n\nMinimum withdrawal is $20\n\nPayments are done via PayPal every 10th of the following Month after submission.</string>
+    <string name="enter_your_email">Enter Your PayPal Email Address</string>
+    <string name="withdraw">Send withdrawal request</string>
+    <string name="withdraw_text">Payments are done every 10th of the following Month after submission\n\nYou can withdraw as many times as you want during the month\n\nCommunications are done via email only</string>
+    <string name="rate_ad">How was the Video?\n\nGive it a rating and say something about it</string>
+    <string name="submit">Submit</string>
+    <string name="skip">Skip</string>
+    <string name="add_details">More details (optional)</string>
+    <string name="knowledge_one">Welcome to AdWork\n\nHere you can earn money by watching &amp; rating videos.\n\nThe more you rate, the more you earn.</string>
+    <string name="knowledge_two">Every video you watch &amp; rate earns you points in AdWork\n\nThe points you earn can be redeemed for real money.</string>
+    <string name="knowledge_three">You must have at least 200 points to make a withdrawal request\n\nAll withdrawals are paid via PayPal every 10th of the following month\n\nStart watching and start earning today\n\nTerms &amp; Conditions apply.</string>
+    <string name="got_it">got it</string>
+    <string name="info_four">At AdWork, we value our customers 24/7\n\nWe aim to make your experience with AdWork smooth, fruitful and seamless\n\nThank you for choosing us to help you make money online daily\n\nIf you ever run into any problems, feel free to contact us at adwork254@gmail.com \n\nor use our WhatsApp number: +254777505099\n\nand we will get back to you within 24hrs\n\n\n\n\n\n© AdWork 2022</string>
+    <string name="info_three">While you use the AdWork App, we collect some data to help make your experience seamless\n\nSome of the data we collect are; but not limited to:\n\n- Username\n- Email Address\n- Points earned\n- Estimated money made\n&amp;\n- Current date\n\nPlease note:\nWe DO NOT sell your data to any third party company\n\nAll data collected is secured using end to end encryption\n\nIf for any reason you would like to have your data deleted from our servers, do not hesitate to reach out to us\n\n\n\n\n\n© AdWork 2022</string>
+    <string name="info_one">Every time you watch &amp; review a video or ad you earn points\n\nThe more points you earn, the more money you make\n\nThe value of each point is calculated independently &amp; an estimate is given for reference\n\nThe more points you make, the more money you make at the end of each month\n\nThe highest earner of the month gets a BONUS reward each and every month\n\nSo what are you waiting for? Start earning online today with AdWork !\n\nPlease note:\nSkipping the review stage after watching a video or ad earns you little to no points at all\n\nSo make sure you give a review every time you watch a video or ad\n\n\n\n\n\n© AdWork 2022</string>
+    <string name="info_two">AdWork requires you to have a minimum of 200 points to make a withdrawal request\n\nAll payments are made through PayPal so please have an active PayPal account\n\nAfter earning enough points, the app will automatically ask you to withdraw to your PayPal account\n\nPlease note:\nPayments are made every 10th of the following month after a withdrawal request is made\n\nYou can make as many withdrawal requests as possible during the month and get a large payout at the end\n\nThe opportunities are endless with AdWork !\n\n\n\n\n\n© AdWork 2022</string>
+    <string name="withdraw_success">Congratulations!\n\nYour withdrawal request has been sent successfully\n\nWe will get back to you after reviewing your ratings and responses\n\nPlease note:\nThe money value indicated on the app is an estimate and the actual value may vary after your request is reviewed</string>
+    <string name="swipe_info">Swipe left &amp; right to see more tabs</string>
+</resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "772671218569",
+    "project_id": "adwork-b29d5",
+    "storage_bucket": "adwork-b29d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:772671218569:android:f2811cdff514abbffa7758",
+        "android_client_info": {
+          "package_name": "com.trolleyhut.toptrendy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "772671218569-gt57mjo7dk8qqp2n6chmrhhoji4hpuk4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSzxD3DRn7K1s3PeuBaXw4Wn1tqLSNFVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "772671218569-gt57mjo7dk8qqp2n6chmrhhoji4hpuk4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
