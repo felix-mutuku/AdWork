@@ -14,6 +14,7 @@ public class IntroActivity extends AppIntro {
     addSlide(IntroSlider.newInstance(R.layout.app_intro1));
     addSlide(IntroSlider.newInstance(R.layout.app_intro2));
     addSlide(IntroSlider.newInstance(R.layout.app_intro3));
+    addSlide(IntroSlider.newInstance(R.layout.app_intro4));
 
     // Show and Hide Skip and Done buttons
     showStatusBar(false);

@@ -4,6 +4,7 @@ public class UserRegisterData {
     // string variable for
     // storing user's name.
     private String userName;
+    private String userEmail;
 
     // string variable for storing
     // user's current date
@@ -24,6 +25,14 @@ public class UserRegisterData {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public String getUserDate() {

@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TopTrendy">
         <activity
+            android:name=".MainActivity2"
+            android:exported="false" />
+        <activity
             android:name=".SplashScreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
@@ -27,12 +30,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+        </activity> <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
         <!-- REAL AdMob app ID: ca-app-pub-5123885596101098~9597382365 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-5123885596101098~9597382365" />
+            android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity
             android:name=".InternetActivity"

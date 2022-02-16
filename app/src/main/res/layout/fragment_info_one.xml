@@ -37,7 +37,7 @@
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/quite_magical"
             android:gravity="center"
-            android:text="How to earn points"
+            android:text="How to earn money"
             android:textColor="@color/white"
             android:textSize="20sp" />
 

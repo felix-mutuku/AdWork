@@ -14,8 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
@@ -24,11 +24,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.text.SimpleDateFormat;
@@ -39,9 +36,12 @@ public class LoginSignUpActivity extends AppCompatActivity {
     public boolean isLoggedin;
     LinearLayout linear_login;
     AVLoadingIndicatorView loading;
-    EditText username;
+    EditText username, user_email;
     Button buttonStart;
-    String Susername = "N/A";
+    String Susername;
+    String date_joined;
+    String Semail;
+    TextView terms;
 
     // creating a variable for our
     // Firebase Database.
@@ -77,7 +77,7 @@ public class LoginSignUpActivity extends AppCompatActivity {
         //databaseReference = firebaseDatabase.getReference("RegisteredUsers");
 
         databaseReference = firebaseDatabase.getReference();
-        databaseReference = databaseReference.child("RegisteredUsers").push();
+        databaseReference = databaseReference.child("AdWorkRegisteredUsers").push();
 
         // initializing our object
         // class variable.
@@ -86,7 +86,9 @@ public class LoginSignUpActivity extends AppCompatActivity {
         linear_login = findViewById(R.id.linear_login);
         loading = findViewById(R.id.loading);
         username = findViewById(R.id.username);
+        user_email = findViewById(R.id.user_email);
         buttonStart = findViewById(R.id.buttonStart);
+        terms = findViewById(R.id.terms);
 
         ImageView login_pic = findViewById(R.id.login_pic);
 
@@ -113,10 +115,22 @@ public class LoginSignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //do something when sign in button clicked
                 //make button disappear and show loading
-                loading.setVisibility(View.VISIBLE);
-                linear_login.setVisibility(View.INVISIBLE);
+                //loading.setVisibility(View.VISIBLE);
+                //linear_login.setVisibility(View.INVISIBLE);
+
+                //check if internet connection is active
+                Constants.checkInternet(LoginSignUpActivity.this);
                 //proceed to signing in
                 signIn();
+            }
+        });
+
+        terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //go to info page
+                Intent i = new Intent(LoginSignUpActivity.this, InfoActivity.class);
+                startActivity(i);
             }
         });
 
@@ -124,22 +138,38 @@ public class LoginSignUpActivity extends AppCompatActivity {
 
     private void signIn() {
         Susername = username.getText().toString();
+        Semail = user_email.getText().toString();
+        //check if email is of desired pattern
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
         //make sure username is not empty
         if (TextUtils.isEmpty(Susername)) {
+            //username is empty,cancel operation
             username.setError("Choose username!");
             loading.setVisibility(View.INVISIBLE);
             linear_login.setVisibility(View.VISIBLE);
             //Constants.showToast("Please choose a username!", LoginSignUpActivity.this);
+        } else if (!Semail.matches(emailPattern) || TextUtils.isEmpty(Semail)) {
+            //username is okay, check if email is okay
+            //email is either empty or wrongly typed, cancel  operations
+            user_email.setError("Enter valid email address!");
+            loading.setVisibility(View.INVISIBLE);
+            linear_login.setVisibility(View.VISIBLE);
         } else {
-            //not empty, can proceed
-            goToMain();
+            //calculate current date and time
+            String dateNow = new SimpleDateFormat("dd-MM-yyy", Locale.getDefault()).format(new Date());
+            String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+            String date = dateNow + " - " + currentTime;
+            //add data to shared preferences
+            addInfoToSharedPreference();
+            //send data to firebase
+            Constants.addRegistrationDataToFirebase(LoginSignUpActivity.this, Susername, Semail, date);
         }
-
     }
 
     private void checkLoginStatus() {
         SharedPreferences getSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        isLoggedin = getSharedPreferences.getBoolean("isLoggedin", false);
+        isLoggedin = getSharedPreferences.getBoolean("AdworkisLoggedin", false);
 
         if (isLoggedin) {
             //user has already logged in
@@ -153,73 +183,8 @@ public class LoginSignUpActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(Constants.PREF_USERNAME, Susername);
+        editor.putString(Constants.PREF_EMAIL, Semail);
+        editor.putString(Constants.PREF_DATE_JOINED, date_joined);
         editor.apply();
     }
-
-    private void goToMain() {
-        //save login session for user
-        SharedPreferences getSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        SharedPreferences.Editor e = getSharedPreferences.edit();
-        e.putBoolean("isLoggedin", true);
-        e.apply();
-
-        addInfoToSharedPreference();
-
-        String date = new SimpleDateFormat("dd-MM-yyy", Locale.getDefault()).format(new Date());
-
-        //add username to firebase
-        addDatatoFirebase(Susername, date);
-
-        //go to main activity after user has finished successfully
-        Intent i = new Intent(LoginSignUpActivity.this, MainActivity.class);
-        startActivity(i);
-        finish();
-    }
-
-    private void addDatatoFirebase(String userName, String date) {
-        // below lines of code is used to set
-        // data in our object class.
-        userRegisterData.setUserName(userName);
-        userRegisterData.setUserDate(date);
-
-        // we are use add value event listener method
-        // which is called with database reference.
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // inside the method of on Data change we are setting
-                // our object class to our database reference.
-                // data base reference will sends data to firebase.
-                databaseReference.setValue(userRegisterData);
-
-                // after adding this data we are showing toast message.
-                Constants.showToast("Successfully Registered !", LoginSignUpActivity.this);
-                //Toast.makeText(MainActivity.this, "data added", Toast.LENGTH_SHORT).show();
-
-                //go to Main Activity
-                goNow();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // if the data is not added or it is cancelled then
-                // we are displaying a failure toast message.
-                Constants.showToast("Failed ! Please Try Again", LoginSignUpActivity.this);
-                Log.e("FIREBASE ERROR >>>", String.valueOf(error));
-                //Toast.makeText(MainActivity.this, "Fail to add data " + error, Toast.LENGTH_SHORT).show();
-
-                //make UI usable
-                loading.setVisibility(View.INVISIBLE);
-                linear_login.setVisibility(View.VISIBLE);
-            }
-        });
-    }
-
-    private void goNow() {
-        //go to main activity after user has finished successfully
-        Intent i = new Intent(LoginSignUpActivity.this, MainActivity.class);
-        startActivity(i);
-        finish();
-    }
-
 }

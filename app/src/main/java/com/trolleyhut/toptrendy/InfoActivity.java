@@ -39,7 +39,7 @@ public class InfoActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
 
         SharedPreferences getSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        isFirstTimeUse = getSharedPreferences.getBoolean("firstTimeUseInfo", true);
+        isFirstTimeUse = getSharedPreferences.getBoolean("AdworkfirstTimeUseInfo", true);
 
         if (isFirstTimeUse) {
             showDialogSwipe();
@@ -56,7 +56,7 @@ public class InfoActivity extends AppCompatActivity {
                     Intent i = new Intent(Intent.ACTION_SEND);
                     i.setType("text/plain");
                     i.putExtra(Intent.EXTRA_SUBJECT, "AdWork App");
-                    String sAux = "\nAdWork App let's you earn money by watching and rating Videos and Ads\n\n" +
+                    String sAux = "\nAdWork App let's you earn money by rating facts from around the world\n\n" +
                             "Download AdWork today and earn a living online!\n\n";
                     sAux = sAux + "http://play.google.com/store/apps/details?id=com.trolleyhut.toptrendy";
                     i.putExtra(Intent.EXTRA_TEXT, sAux);
@@ -93,7 +93,7 @@ public class InfoActivity extends AppCompatActivity {
                 //exit dialogs to continue using app
                 SharedPreferences getSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                 SharedPreferences.Editor e = getSharedPreferences.edit();
-                e.putBoolean("firstTimeUseInfo", false);
+                e.putBoolean("AdworkfirstTimeUseInfo", false);
                 e.apply();
                 //dismiss dialog
                 swipeInfoDialog.dismiss();

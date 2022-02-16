@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     private final String TAG = "MainActivity";
     //for calculating moneys
     double coins = 0.05; //one point is $0.05 or Ksh5
-    int maxPoints = 4; //number of points allowed to make a withdrawal request
+    int maxPoints = 200; //number of points allowed to make a withdrawal request
 
     // creating a variable for our
     // Firebase Database.
@@ -705,7 +705,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void checkKnowledgeStatus() {
         SharedPreferences getSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        isFirstTimeUse = getSharedPreferences.getBoolean("firstTimeUse", true);
+        isFirstTimeUse = getSharedPreferences.getBoolean("adWorkfirstTimeUse", true);
 
         if (isFirstTimeUse) {
             //show knowledge 1 for welcome

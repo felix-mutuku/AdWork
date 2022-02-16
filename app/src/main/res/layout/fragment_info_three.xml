@@ -36,7 +36,7 @@
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/quite_magical"
             android:gravity="center"
-            android:text="Privacy policy"
+            android:text="Terms &amp; Privacy policy"
             android:textColor="@color/white"
             android:textSize="20sp" />
 

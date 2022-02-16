@@ -139,20 +139,20 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         ImageView splash_pic = findViewById(R.id.splash_pic);
 
-        RequestOptions options = new RequestOptions()
-                //.centerCrop()
-                //.placeholder(R.drawable.loading_gif)
-                .skipMemoryCache(false)
-                .error(R.drawable.logo)
-                .priority(Priority.HIGH);
-
-        Glide
-                .with(SplashScreenActivity.this)
-                .load(R.drawable.splash_background)
-                .transition(withCrossFade())
-                //.thumbnail(0.1f)
-                .apply(options)
-                .into(splash_pic);
+//        RequestOptions options = new RequestOptions()
+//                //.centerCrop()
+//                //.placeholder(R.drawable.loading_gif)
+//                .skipMemoryCache(false)
+//                .error(R.drawable.logo)
+//                .priority(Priority.HIGH);
+//
+//        Glide
+//                .with(SplashScreenActivity.this)
+//                .load(R.drawable.splash_background)
+//                .transition(withCrossFade())
+//                //.thumbnail(0.1f)
+//                .apply(options)
+//                .into(splash_pic);
 
         cManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         assert cManager != null;
@@ -180,7 +180,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private void goToNext() {
         SharedPreferences getSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        isFirstStart = getSharedPreferences.getBoolean("firstStart", true);
+        isFirstStart = getSharedPreferences.getBoolean("AdworkfirstStart", true);
 
         if (isFirstStart) {
             //user has not viewed intro
@@ -188,7 +188,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             startActivity(i);
             finish();
             SharedPreferences.Editor e = getSharedPreferences.edit();
-            e.putBoolean("firstStart", false);
+            e.putBoolean("AdworkfirstStart", false);
             e.apply();
         } else {
             //user already viewed intro
