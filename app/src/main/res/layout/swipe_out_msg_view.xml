@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="350dp"
-    android:layout_height="425dp"
+    android:layout_height="725dp"
     android:gravity="end"
     android:orientation="vertical">
 
@@ -12,6 +12,6 @@
         android:fontFamily="@font/quite_magical"
         android:text="Sounds False"
         android:textColor="@color/red_two"
-        android:textSize="32sp"
+        android:textSize="22sp"
         android:textStyle="bold" />
 </LinearLayout>

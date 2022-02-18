@@ -173,7 +173,7 @@ public class LoginSignUpActivity extends AppCompatActivity {
 
         if (isLoggedin) {
             //user has already logged in
-            Intent i = new Intent(LoginSignUpActivity.this, MainActivity.class);
+            Intent i = new Intent(LoginSignUpActivity.this, MainActivity2.class);
             startActivity(i);
             finish();
         }

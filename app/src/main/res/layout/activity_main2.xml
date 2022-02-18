@@ -41,44 +41,21 @@
         android:layout_margin="10dp"
         android:src="@drawable/logo" />
 
-    <FrameLayout
+    <com.mindorks.placeholderview.SwipeDirectionalView
+        android:id="@+id/swipeView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent" />
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="80dp"-->
-<!--            android:layout_gravity="bottom"-->
-<!--            android:gravity="center"-->
-<!--            android:orientation="horizontal">-->
-
-<!--            <ImageButton-->
-<!--                android:id="@+id/rejectBtn"-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:background="@drawable/ic_cancel" />-->
-
-<!--            <ImageButton-->
-<!--                android:id="@+id/acceptBtn"-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:layout_marginLeft="30dp"-->
-<!--                android:background="@drawable/ic_heart" />-->
-
-<!--            <ImageButton-->
-<!--                android:id="@+id/undoBtn"-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:layout_marginLeft="30dp"-->
-<!--                android:background="@drawable/ic_book_black_18dp" />-->
-<!--        </LinearLayout>-->
-
-        <com.mindorks.placeholderview.SwipeDirectionalView
-            android:id="@+id/swipeView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </FrameLayout>
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="50dp"
+        android:elevation="20dp"
+        android:background="@drawable/bg_button3"
+        android:src="@drawable/shuffle_icon_white" />
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"

@@ -348,7 +348,7 @@ public class Constants {
                 e.apply();
 
                 //go to Main Activity
-                Intent i = new Intent(a, MainActivity.class);
+                Intent i = new Intent(a, MainActivity2.class);
                 a.startActivity(i);
                 a.finish();
             }
