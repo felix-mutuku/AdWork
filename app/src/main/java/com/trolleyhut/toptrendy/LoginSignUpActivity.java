@@ -77,7 +77,7 @@ public class LoginSignUpActivity extends AppCompatActivity {
         //databaseReference = firebaseDatabase.getReference("RegisteredUsers");
 
         databaseReference = firebaseDatabase.getReference();
-        databaseReference = databaseReference.child("AdWorkRegisteredUsers").push();
+        databaseReference = databaseReference.child(Constants.FIREBASE_REGISTERED_USERS).push();
 
         // initializing our object
         // class variable.
@@ -169,7 +169,7 @@ public class LoginSignUpActivity extends AppCompatActivity {
 
     private void checkLoginStatus() {
         SharedPreferences getSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        isLoggedin = getSharedPreferences.getBoolean("AdworkisLoggedin", false);
+        isLoggedin = getSharedPreferences.getBoolean(Constants.LOGIN_TOKEN, false);
 
         if (isLoggedin) {
             //user has already logged in

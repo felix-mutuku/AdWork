@@ -59,6 +59,7 @@
             android:hint="@string/choose_your_username"
             android:inputType="textFilter"
             android:padding="5dp"
+            android:maxLength="20"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:textColor="@color/black"

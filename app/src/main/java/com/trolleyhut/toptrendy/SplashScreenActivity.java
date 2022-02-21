@@ -3,31 +3,19 @@ package com.trolleyhut.toptrendy;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import static android.Manifest.permission.ACCESS_NETWORK_STATE;
-import static android.Manifest.permission.INTERNET;
-
-import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.Priority;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
@@ -180,7 +168,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private void goToNext() {
         SharedPreferences getSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        isFirstStart = getSharedPreferences.getBoolean("AdworkfirstStart", true);
+        isFirstStart = getSharedPreferences.getBoolean(Constants.SPLASH_TOKEN, true);
 
         if (isFirstStart) {
             //user has not viewed intro
@@ -188,7 +176,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             startActivity(i);
             finish();
             SharedPreferences.Editor e = getSharedPreferences.edit();
-            e.putBoolean("AdworkfirstStart", false);
+            e.putBoolean(Constants.SPLASH_TOKEN, false);
             e.apply();
         } else {
             //user already viewed intro

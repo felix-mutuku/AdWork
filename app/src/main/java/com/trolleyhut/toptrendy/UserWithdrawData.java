@@ -4,21 +4,17 @@ public class UserWithdrawData {
     // string variable for
     // storing user's name.
     private String userName;
-
-    // string variable for storing
-    // user's contact email
     private String userEmail;
-
-    // string variable for storing
-    // user's points
-    private String userPoints;
-
-    // string variable for storing
-    // user's points lifetime
-    private String userPointsLifetime;
-
-    // string variable for storing
-    // user's current date
+    private String userDateJoined;
+    private String estEarnings;
+    private String factsSeen;
+    private String adsWatched;
+    private String adsSkipped;
+    private String totalStreaks;
+    private String totalWithdrawals;
+    private String points;
+    private String pointsDeducted;
+    private String pointsLifeTime;
     private String userDate;
 
     // an empty constructor is
@@ -46,20 +42,84 @@ public class UserWithdrawData {
         this.userEmail = userEmail;
     }
 
-    public String getUserPoints() {
-        return userPoints;
+    public String getUserDateJoined() {
+        return userDateJoined;
     }
 
-    public void setUserPoints(String userPoints) {
-        this.userPoints = userPoints;
+    public void setUserDateJoined(String userDateJoined) {
+        this.userDateJoined = userDateJoined;
     }
 
-    public String getUserPointsLifetime() {
-        return userPointsLifetime;
+    public String getEstEarnings() {
+        return estEarnings;
     }
 
-    public void setUserPointsLifetime(String userPointsLifetime) {
-        this.userPointsLifetime = userPointsLifetime;
+    public void setEstEarnings(String estEarnings) {
+        this.estEarnings = estEarnings;
+    }
+
+    public String getFactsSeen() {
+        return factsSeen;
+    }
+
+    public void setFactsSeen(String factsSeen) {
+        this.factsSeen = factsSeen;
+    }
+
+    public String getAdsWatched() {
+        return adsWatched;
+    }
+
+    public void setAdsWatched(String adsWatched) {
+        this.adsWatched = adsWatched;
+    }
+
+    public String getAdsSkipped() {
+        return adsSkipped;
+    }
+
+    public void setAdsSkipped(String adsSkipped) {
+        this.adsSkipped = adsSkipped;
+    }
+
+    public String getTotalStreaks() {
+        return totalStreaks;
+    }
+
+    public void setTotalStreaks(String totalStreaks) {
+        this.totalStreaks = totalStreaks;
+    }
+
+    public String getTotalWithdrawals() {
+        return totalWithdrawals;
+    }
+
+    public void setTotalWithdrawals(String totalWithdrawals) {
+        this.totalWithdrawals = totalWithdrawals;
+    }
+
+    public String getPoints() {
+        return points;
+    }
+
+    public void setPoints(String points) {
+        this.points = points;
+    }
+
+    public String getPointsDeducted() {
+        return pointsDeducted;
+    }
+
+    public void setPointsDeducted(String pointsDeducted) {
+        this.pointsDeducted = pointsDeducted;
+    }
+
+    public String getPointsLifeTime() {
+        return pointsLifeTime;
+    }
+
+    public void setPointsLifeTime(String pointsLifeTime) {
+        this.pointsLifeTime = pointsLifeTime;
     }
 
     public String getUserDate() {
@@ -69,4 +129,5 @@ public class UserWithdrawData {
     public void setUserDate(String userDate) {
         this.userDate = userDate;
     }
+
 }

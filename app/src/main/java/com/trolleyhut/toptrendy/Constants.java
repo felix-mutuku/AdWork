@@ -48,6 +48,22 @@ public class Constants {
     public static final String PREF_POINTS_LIFETIME = "adwork_points_lifetime";
     public static final String PREF_DATE_JOINED = "adwork_date_joined";
     public static final String PREF_POINTS_DEDUCTED = "adwork_points_deducted";
+    public static final String PREF_EST_EARNINGS = "adwork_est_earnings";
+    public static final String PREF_ADS_WATCHED = "adwork_ads_watched";
+    public static final String PREF_ADS_SKIPPED = "adwork_ads_skipped";
+    public static final String PREF_FACTS_SEEN = "adwork_facts_seen";
+    public static final String PREF_TOTAL_STREAKS = "adwork_total_streaks";
+    public static final String PREF_TOTAL_WITHDRAWALS = "adwork_total_withdrawals";
+
+    //app tokens
+    public static final String LOGIN_TOKEN = "AdworkisLoggedin";
+    public static final String INFO_TOKEN = "AdworkfirstTimeUseInfo";
+    public static final String MAIN_TOKEN = "AdworkfirstTimeUseMain";
+    public static final String SPLASH_TOKEN = "AdworkfirstStartUp";
+
+    //Firebase database names
+    public static final String FIREBASE_REGISTERED_USERS = "AdWorkRegisteredUsers";
+
 
     //display toast to user
     public static void showToast(String s, Activity a) {
@@ -187,6 +203,10 @@ public class Constants {
         //show only two decimal places
         Docash = Double.parseDouble(String.format("%.2f", Docash));
 
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(PREF_EST_EARNINGS, String.valueOf(Docash));
+        editor.apply();
+
         //show next dialog for knowledge
         Dialog current_estimate_dialog = new Dialog(a);
         current_estimate_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -313,7 +333,7 @@ public class Constants {
         //databaseReference = firebaseDatabase.getReference("RegisteredUsers");
 
         databaseReference = firebaseDatabase.getReference();
-        databaseReference = databaseReference.child("AdWorkRegisteredUsers").push();
+        databaseReference = databaseReference.child("RegisteredUsers").push();
 
         // initializing our object
         // class variable.
@@ -344,7 +364,7 @@ public class Constants {
                 //set logged in cookie
                 SharedPreferences getSharedPreferences = PreferenceManager.getDefaultSharedPreferences(a.getBaseContext());
                 SharedPreferences.Editor e = getSharedPreferences.edit();
-                e.putBoolean("AdworkisLoggedin", true);
+                e.putBoolean(LOGIN_TOKEN, true);
                 e.apply();
 
                 //go to Main Activity
@@ -364,6 +384,129 @@ public class Constants {
                 loadingDialog.dismiss();
             }
         });
+    }
+
+    public static void addWithdrawDataToFirebase(String userName, String userEmail, String userDateJoined,
+                                                 String estEarnings, String factsSeen, String adsWatched,
+                                                 String adsSkipped, String totalStreaks, String totalWithdrawals,
+                                                 String points, String pointsDeducted, String pointsLifeTime,
+                                                 String date, Activity a) {
+
+        //show user that you are loading
+        showLoadingDialog(a);
+        //initialize variables
+        FirebaseDatabase firebaseDatabase;
+        // creating a variable for our Database
+        // Reference for Firebase.
+        DatabaseReference databaseReference;
+
+        // creating a variable for
+        // our object class
+        UserWithdrawData userWithdrawData;
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
+        // below line is used to get reference for our database.
+        //databaseReference = firebaseDatabase.getReference("RegisteredUsers");
+
+        databaseReference = firebaseDatabase.getReference();
+        databaseReference = databaseReference.child("RegisteredUsers").push();
+
+        // initializing our object
+        // class variable.
+        userWithdrawData = new UserWithdrawData();
+        // below lines of code is used to set
+        // data in our object class.
+        userWithdrawData.setUserName(userName);
+        userWithdrawData.setUserEmail(userEmail);
+        userWithdrawData.setUserDate(date);
+        userWithdrawData.setUserDateJoined(userDateJoined);
+        userWithdrawData.setEstEarnings(estEarnings);
+        userWithdrawData.setFactsSeen(factsSeen);
+        userWithdrawData.setAdsWatched(adsWatched);
+        userWithdrawData.setAdsSkipped(adsSkipped);
+        userWithdrawData.setTotalStreaks(totalStreaks);
+        userWithdrawData.setTotalWithdrawals(totalWithdrawals);
+        userWithdrawData.setPoints(points);
+        userWithdrawData.setPointsDeducted(pointsDeducted);
+        userWithdrawData.setPointsLifeTime(pointsLifeTime);
+
+        // we are use add value event listener method
+        // which is called with database reference.
+        DatabaseReference finalDatabaseReference = databaseReference;
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // inside the method of on Data change we are setting
+                // our object class to our database reference.
+                // data base reference will sends data to firebase.
+                finalDatabaseReference.setValue(userWithdrawData);
+
+                // after adding this data we are showing toast message.
+                Constants.showToast("Request Sent !", a);
+
+                //make UI usable
+                loadingDialog.dismiss();
+
+                //go to Main Activity
+                Intent i = new Intent(a, MainActivity2.class);
+                a.startActivity(i);
+                a.finish();
+
+                //show success dialog
+                showWithDrawSuccessDialog(a);
+                //reset points and EST earnings
+                resetPoints(a);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // if the data is not added or it is cancelled then
+                // we are displaying a failure toast message.
+                Constants.showToast("Failed ! Please Try Again", a);
+                Log.e("FIREBASE ERROR >>>", String.valueOf(error));
+
+                //make UI usable
+                loadingDialog.dismiss();
+            }
+        });
+    }
+
+    private static void resetPoints(Activity a) {
+
+        //reset points and est earnings
+        SharedPreferences sharedPreferences = a.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Constants.PREF_USERNAME, Susername);
+        editor.putString(Constants.PREF_EMAIL, Semail);
+        editor.putString(Constants.PREF_DATE_JOINED, date_joined);
+        editor.apply();
+
+        public static final String PREF_POINTS = "adwork_points";
+        public static final String PREF_POINTS_LIFETIME = "adwork_points_lifetime";
+        public static final String PREF_EST_EARNINGS = "adwork_est_earnings";
+        public static final String PREF_TOTAL_WITHDRAWALS = "adwork_total_withdrawals";
+    }
+
+    private static void showWithDrawSuccessDialog(Activity a) {
+        //show next dialog for knowledge
+        Dialog withdraw_success_dialog = new Dialog(a);
+        withdraw_success_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        withdraw_success_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        withdraw_success_dialog.setCancelable(true);
+        withdraw_success_dialog.setContentView(R.layout.dialog_withdraw_success);
+
+        Button gotIt = withdraw_success_dialog.findViewById(R.id.buttonGotIt);
+
+        gotIt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //exit dialogs to continue using app
+                withdraw_success_dialog.dismiss();
+            }
+        });
+
+        withdraw_success_dialog.show();
     }
 
     public static void showLoadingDialog(Activity a) {

@@ -5,9 +5,6 @@ public class UserRegisterData {
     // storing user's name.
     private String userName;
     private String userEmail;
-
-    // string variable for storing
-    // user's current date
     private String userDate;
 
     // an empty constructor is
@@ -42,4 +39,5 @@ public class UserRegisterData {
     public void setUserDate(String userDate) {
         this.userDate = userDate;
     }
+
 }

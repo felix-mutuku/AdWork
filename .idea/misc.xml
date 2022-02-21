@@ -33,6 +33,7 @@
         <entry key="..\:/Users/felix/AndroidStudioProjects/TopTrendy/app/src/main/res/layout/fragment_info_two.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/felix/AndroidStudioProjects/TopTrendy/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/felix/AndroidStudioProjects/TopTrendy/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/drawable/bg_button.xml" value="0.1375" />
         <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/drawable/bg_button11.xml" value="0.1375" />
         <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/drawable/bg_button2.xml" value="0.1375" />
         <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/drawable/bg_button3.xml" value="0.1375" />
@@ -45,6 +46,7 @@
         <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/layout/activity_login_sign_up.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/layout/activity_main.xml" value="0.161231884057971" />
         <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/layout/activity_main2.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/layout/activity_profile.xml" value="0.161231884057971" />
         <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/layout/activity_splash_screen.xml" value="0.161231884057971" />
         <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/layout/app_intro1.xml" value="0.161231884057971" />
         <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/layout/app_intro2.xml" value="0.161231884057971" />
@@ -52,7 +54,10 @@
         <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/layout/app_intro4.xml" value="0.161231884057971" />
         <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/layout/dialog_current_estimate.xml" value="0.161231884057971" />
         <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/layout/dialog_please_wait2.xml" value="0.161231884057971" />
+        <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/layout/dialog_swipe_info.xml" value="0.161231884057971" />
+        <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/layout/dialog_swipe_main.xml" value="0.161231884057971" />
         <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/layout/dialog_warning.xml" value="0.22" />
+        <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/layout/dialog_withdraw.xml" value="0.161231884057971" />
         <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/layout/dialog_withdraw_success.xml" value="0.161231884057971" />
         <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/layout/fragment_info_four.xml" value="0.161231884057971" />
         <entry key="..\:/Users/felix/Desktop/Trolleyhut/Apps/AdWork/app/src/main/res/layout/fragment_info_one.xml" value="0.16666666666666666" />

@@ -27,7 +27,7 @@ public class InfoActivity extends AppCompatActivity {
         // Find the view pager that will
         // allow the user to swipe
         // between fragments
-        ViewPager viewPager = (ViewPager)findViewById(R.id.viewpager);
+        ViewPager viewPager = findViewById(R.id.viewpager);
 
         // Create an adapter that
         // knows which fragment should
@@ -39,7 +39,7 @@ public class InfoActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
 
         SharedPreferences getSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        isFirstTimeUse = getSharedPreferences.getBoolean("AdworkfirstTimeUseInfo", true);
+        isFirstTimeUse = getSharedPreferences.getBoolean(Constants.INFO_TOKEN, true);
 
         if (isFirstTimeUse) {
             showDialogSwipe();
@@ -93,7 +93,7 @@ public class InfoActivity extends AppCompatActivity {
                 //exit dialogs to continue using app
                 SharedPreferences getSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                 SharedPreferences.Editor e = getSharedPreferences.edit();
-                e.putBoolean("AdworkfirstTimeUseInfo", false);
+                e.putBoolean(Constants.INFO_TOKEN, false);
                 e.apply();
                 //dismiss dialog
                 swipeInfoDialog.dismiss();

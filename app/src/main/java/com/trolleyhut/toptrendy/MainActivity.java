@@ -445,7 +445,7 @@ public class MainActivity extends AppCompatActivity {
             //set login status to false and login again
             SharedPreferences getSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
             SharedPreferences.Editor e = getSharedPreferences.edit();
-            e.putBoolean("isLoggedin", false);
+            e.putBoolean("AdworkisLoggedin", false);
             e.apply();
 
             //start app from beginning

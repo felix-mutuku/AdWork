@@ -25,10 +25,10 @@
             android:hint="@string/enter_your_email"
             android:inputType="textEmailAddress"
             android:padding="5dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="20sp" />
 
         <TextView
@@ -53,6 +53,21 @@
             android:fontFamily="@font/quite_magical"
             android:padding="10dp"
             android:text="@string/withdraw"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonClose"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_button3"
+            android:fontFamily="@font/quite_magical"
+            android:padding="10dp"
+            android:layout_margin="20dp"
+            android:text="@string/close"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="20sp"
