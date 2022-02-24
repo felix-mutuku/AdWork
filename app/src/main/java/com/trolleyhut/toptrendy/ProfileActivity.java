@@ -34,7 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
     Button buttonWithdraw;
     String SuserName, SuserEmail, SuserDateJoined, SestEarnings, SfactsSeen, SadsWatched,
             SadsSkipped, StotalStreaks, StotalWithdrawals, Spoints, SpointsLifeTime, SpointsDeducted;
-    Dialog withdraw_dialog;
+    Dialog withdraw_dialog, delete_dialog, warning_dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +70,15 @@ public class ProfileActivity extends AppCompatActivity {
         buttonWithdraw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //show withdrawal dialog
-                showWithdrawDialog();
+                int NumPoints = Integer.parseInt(Spoints);
+
+                if (NumPoints >= Constants.max_points) {
+                    //show withdrawal dialog
+                    showWithdrawDialog();
+                } else {
+                    //show least required money dialog
+                    showWithdrawWarningDialog();
+                }
             }
         });
 
@@ -79,12 +86,15 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //show delete account dialog
-
+                showDeleteDialog();
             }
         });
 
         //get information needed for calculations
         getUserInfoFromPreferences();
+
+        //check streaks
+        ConsecutiveDayChecker.onUserLogin(ProfileActivity.this);
 
     }
 
@@ -102,7 +112,6 @@ public class ProfileActivity extends AppCompatActivity {
         Spoints = sharedPreferences.getString(Constants.PREF_POINTS, "0");
         SpointsLifeTime = sharedPreferences.getString(Constants.PREF_POINTS_LIFETIME, "0");
         SpointsDeducted = sharedPreferences.getString(Constants.PREF_POINTS_DEDUCTED, "0");
-
 
         //check if login is okay
         if (SuserName.equals("N/A")) {
@@ -170,5 +179,86 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         withdraw_dialog.show(); //don't forget to dismiss the dialog when done loading
+    }
+
+    private void showWithdrawWarningDialog() {
+        //show withdraw dialog
+        warning_dialog = new Dialog(ProfileActivity.this);
+        warning_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        warning_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        warning_dialog.setCancelable(false);
+        warning_dialog.setContentView(R.layout.dialog_withdraw_warning);
+
+        Button gotIt = warning_dialog.findViewById(R.id.buttonGotIt);
+
+        gotIt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //close dialog
+                warning_dialog.dismiss();
+            }
+        });
+
+        warning_dialog.show(); //don't forget to dismiss the dialog when done loading
+    }
+
+    private void showDeleteDialog() {
+        //show withdraw dialog
+        delete_dialog = new Dialog(ProfileActivity.this);
+        delete_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        delete_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        delete_dialog.setCancelable(false);
+        delete_dialog.setContentView(R.layout.dialog_delete_profile);
+
+        Button delete = delete_dialog.findViewById(R.id.buttonDelete);
+        Button close = delete_dialog.findViewById(R.id.buttonClose);
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //delete all user details in account
+                deleteUserData();
+            }
+        });
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //close dialog
+                delete_dialog.dismiss();
+            }
+        });
+
+        delete_dialog.show(); //don't forget to dismiss the dialog when done loading
+    }
+
+    private void deleteUserData() {
+        //delete all data from shared preferences
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Constants.PREF_USERNAME, "N/A");
+        editor.putString(Constants.PREF_EMAIL, "N/A");
+        editor.putString(Constants.PREF_POINTS, "0");
+        editor.putString(Constants.PREF_POINTS_LIFETIME, "0");
+        editor.putString(Constants.PREF_DATE_JOINED, "N/A");
+        editor.putString(Constants.PREF_POINTS_DEDUCTED, "0");
+        editor.putString(Constants.PREF_EST_EARNINGS, "0");
+        editor.putString(Constants.PREF_ADS_WATCHED, "0");
+        editor.putString(Constants.PREF_ADS_SKIPPED, "0");
+        editor.putString(Constants.PREF_FACTS_SEEN, "0");
+        editor.putString(Constants.PREF_TOTAL_STREAKS, "0");
+        editor.putString(Constants.PREF_TOTAL_WITHDRAWALS, "0");
+        editor.apply();
+
+        //set logged in cookie
+        SharedPreferences getSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SharedPreferences.Editor e = getSharedPreferences.edit();
+        e.putBoolean(Constants.LOGIN_TOKEN, false);
+        e.apply();
+
+        //go to splash activity and re-start the app
+        Intent i = new Intent(ProfileActivity.this, SplashScreenActivity.class);
+        startActivity(i);
+        finish();
     }
 }

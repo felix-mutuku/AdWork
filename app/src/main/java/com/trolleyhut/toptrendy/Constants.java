@@ -38,6 +38,7 @@ public class Constants {
     public static final String BASE_URL_LOGIC = "";
     public static double coins = 0.05; //one point is $0.05 or Ksh5
     public static int warning_points = 380; //one point is $0.05 or Ksh5
+    public static int max_points = 400; //one point is $0.05 or Ksh5
     public static Dialog loadingDialog;
 
     //saving a user's personal data in shared preferences
@@ -59,6 +60,7 @@ public class Constants {
     public static final String LOGIN_TOKEN = "AdworkisLoggedin";
     public static final String INFO_TOKEN = "AdworkfirstTimeUseInfo";
     public static final String MAIN_TOKEN = "AdworkfirstTimeUseMain";
+    public static final String MAIN_KNOWLEDGE_TOKEN = "AdworkfirstTimeUseMainKnowledge";
     public static final String SPLASH_TOKEN = "AdworkfirstStartUp";
 
     //Firebase database names
@@ -473,19 +475,19 @@ public class Constants {
     }
 
     private static void resetPoints(Activity a) {
+        SharedPreferences sharedPreferences = a.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String StotalWithdrawals = sharedPreferences.getString(PREF_TOTAL_WITHDRAWALS, "0");
+
+        //add one to withdrawals
+        int NumWithdrawals = Integer.parseInt(StotalWithdrawals);
+        NumWithdrawals = NumWithdrawals + 1;
 
         //reset points and est earnings
-        SharedPreferences sharedPreferences = a.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(Constants.PREF_USERNAME, Susername);
-        editor.putString(Constants.PREF_EMAIL, Semail);
-        editor.putString(Constants.PREF_DATE_JOINED, date_joined);
+        editor.putString(PREF_POINTS, "0");
+        editor.putString(PREF_EST_EARNINGS, "0");
+        editor.putString(PREF_TOTAL_WITHDRAWALS, String.valueOf(NumWithdrawals));
         editor.apply();
-
-        public static final String PREF_POINTS = "adwork_points";
-        public static final String PREF_POINTS_LIFETIME = "adwork_points_lifetime";
-        public static final String PREF_EST_EARNINGS = "adwork_est_earnings";
-        public static final String PREF_TOTAL_WITHDRAWALS = "adwork_total_withdrawals";
     }
 
     private static void showWithDrawSuccessDialog(Activity a) {

@@ -23,7 +23,7 @@ public class MainActivity2 extends AppCompatActivity {
     private SwipePlaceHolderView mSwipeView;
     private Context mContext;
     public boolean isFirstTimeUse;
-    Dialog swipeMainDialog;
+    Dialog swipeMainDialog, knowledge_one_dialog, knowledge_two_dialog, knowledge_three_dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +50,11 @@ public class MainActivity2 extends AppCompatActivity {
             mSwipeView.addView(new QuestionsCard(mContext, questions, mSwipeView));
         }
 
-        SharedPreferences getSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        isFirstTimeUse = getSharedPreferences.getBoolean(Constants.MAIN_TOKEN, true);
+        //check if first time use
+        checkKnowledgeStatus();
 
-        if (isFirstTimeUse) {
-            showDialogSwipeMain();
-        }
+        //check Streaks
+        ConsecutiveDayChecker.onUserLogin(MainActivity2.this);
 
     }
 
@@ -83,6 +82,81 @@ public class MainActivity2 extends AppCompatActivity {
         });
 
         swipeMainDialog.show();
+    }
+
+    private void checkKnowledgeStatus() {
+        SharedPreferences getSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        isFirstTimeUse = getSharedPreferences.getBoolean(Constants.MAIN_KNOWLEDGE_TOKEN, true);
+
+        if (isFirstTimeUse) {
+            //show knowledge 1 for welcome
+            knowledge_one_dialog = new Dialog(MainActivity2.this);
+            knowledge_one_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            knowledge_one_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            knowledge_one_dialog.setCancelable(false);
+            knowledge_one_dialog.setContentView(R.layout.dialog_knowledge_one);
+
+            Button gotIt = knowledge_one_dialog.findViewById(R.id.buttonGotIt);
+
+            gotIt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //dismiss first dialog
+                    knowledge_one_dialog.dismiss();
+                    //show next dialog for knowledge
+                    knowledge_two_dialog = new Dialog(MainActivity2.this);
+                    knowledge_two_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    knowledge_two_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    knowledge_two_dialog.setCancelable(false);
+                    knowledge_two_dialog.setContentView(R.layout.dialog_knowledge_two);
+
+                    Button gotIt = knowledge_two_dialog.findViewById(R.id.buttonGotIt);
+
+                    gotIt.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            // dismiss first dialog
+                            knowledge_two_dialog.dismiss();
+                            //show next dialog for knowledge
+                            knowledge_three_dialog = new Dialog(MainActivity2.this);
+                            knowledge_three_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            knowledge_three_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            knowledge_three_dialog.setCancelable(false);
+                            knowledge_three_dialog.setContentView(R.layout.dialog_knowledge_three);
+
+                            Button gotIt = knowledge_three_dialog.findViewById(R.id.buttonGotIt);
+
+                            gotIt.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    //exit dialogs to continue using app
+                                    //save knowledge session for user
+                                    SharedPreferences getSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                                    SharedPreferences.Editor e = getSharedPreferences.edit();
+                                    e.putBoolean(Constants.MAIN_KNOWLEDGE_TOKEN, false);
+                                    e.apply();
+                                    //close dialog
+                                    knowledge_three_dialog.dismiss();
+
+                                    //SharedPreferences getSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                                    isFirstTimeUse = getSharedPreferences.getBoolean(Constants.MAIN_TOKEN, true);
+
+                                    if (isFirstTimeUse) {
+                                        showDialogSwipeMain();
+                                    }
+                                }
+                            });
+
+                            knowledge_three_dialog.show(); //don't forget to dismiss the dialog when done loading
+                        }
+                    });
+
+                    knowledge_two_dialog.show(); //don't forget to dismiss the dialog when done loading
+                }
+            });
+
+            knowledge_one_dialog.show(); //don't forget to dismiss the dialog when done loading
+        }
     }
 
 }

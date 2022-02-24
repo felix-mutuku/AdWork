@@ -172,6 +172,7 @@ public class LoginSignUpActivity extends AppCompatActivity {
         isLoggedin = getSharedPreferences.getBoolean(Constants.LOGIN_TOKEN, false);
 
         if (isLoggedin) {
+            ConsecutiveDayChecker.onUserLogin(LoginSignUpActivity.this);
             //user has already logged in
             Intent i = new Intent(LoginSignUpActivity.this, MainActivity2.class);
             startActivity(i);

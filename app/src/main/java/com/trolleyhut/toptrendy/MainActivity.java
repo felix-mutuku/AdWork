@@ -180,8 +180,6 @@ public class MainActivity extends AppCompatActivity {
         userRatingData = new UserRatingData();
         userWithdrawData = new UserWithdrawData();
 
-        //check if user is logged in
-        checkKnowledgeStatus();
 
         ImageView main_pic = findViewById(R.id.main_pic);
         buttonWatch = findViewById(R.id.buttonWatch);
@@ -553,35 +551,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void showWithdrawDialog() {
-        //show withdraw dialog
-        withdraw_dialog = new Dialog(MainActivity.this);
-        withdraw_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        withdraw_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        withdraw_dialog.setCancelable(false);
-        withdraw_dialog.setContentView(R.layout.dialog_withdraw);
-
-        EditText paypalEmail = withdraw_dialog.findViewById(R.id.paypal_email);
-        Button withdraw = withdraw_dialog.findViewById(R.id.buttonWithdraw);
-
-        withdraw.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Pemail = paypalEmail.getText().toString();
-                //send data to firebase
-                showLoadingDialog();
-                //calculate time and date
-                String dateNow = new SimpleDateFormat("dd-MM-yyy", Locale.getDefault()).format(new Date());
-                String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
-                String date = dateNow + " - " + currentTime;
-                //send to firebase
-                addWithdrawDatatoFirebase(Susername, Pemail, Spoints, SpointsLifetime, date);
-            }
-        });
-
-        withdraw_dialog.show(); //don't forget to dismiss the dialog when done loading
-    }
-
     private void showLoadingDialog() {
         loading_dialog = new Dialog(MainActivity.this);
         loading_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -645,130 +614,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void addWithdrawDatatoFirebase(String userName, String userEmail, String userPoints,
-                                           String userPointsLifetime, String date) {
-        // below lines of code is used to set
-        // data in our object class.
-        userWithdrawData.setUserName(userName);
-        userWithdrawData.setUserEmail(userEmail);
-        userWithdrawData.setUserPoints(userPoints);
-        userWithdrawData.setUserPointsLifetime(userPointsLifetime);
-        userWithdrawData.setUserDate(date);
-
-        // we are use add value event listener method
-        // which is called with database reference.
-        databaseReferenceWithdraw.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // inside the method of on Data change we are setting
-                // our object class to our database reference.
-                // data base reference will sends data to firebase.
-                databaseReferenceWithdraw.setValue(userWithdrawData);
-
-                String nilPoints = "0";
-                //clear points to start earning again
-                SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString(Constants.PREF_POINTS, nilPoints);
-                editor.apply();
-
-                // after adding this data we are showing toast message.
-                Constants.showToast("Withdrawal request submitted !", MainActivity.this);
-                //Toast.makeText(MainActivity.this, "data added", Toast.LENGTH_SHORT).show();
-
-                //make UI usable again
-                loading.setVisibility(View.INVISIBLE);
-                linear_login.setVisibility(View.VISIBLE);
-                adError.setVisibility(View.INVISIBLE);
-                loading_dialog.dismiss();
-                withdraw_dialog.dismiss();
-                //show user dialog
-                showDialogSuccess();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // if the data is not added or it is cancelled then
-                // we are displaying a failure toast message.
-                Constants.showToast("Failed ! Please Try Again", MainActivity.this);
-                Log.e("FIREBASE ERROR >>>", String.valueOf(error));
-                //Toast.makeText(MainActivity.this, "Fail to add data " + error, Toast.LENGTH_SHORT).show();
-
-                //make UI usable
-                loading.setVisibility(View.INVISIBLE);
-                linear_login.setVisibility(View.VISIBLE);
-                adError.setVisibility(View.INVISIBLE);
-                loading_dialog.dismiss();
-            }
-        });
-    }
-
-    private void checkKnowledgeStatus() {
-        SharedPreferences getSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        isFirstTimeUse = getSharedPreferences.getBoolean("adWorkfirstTimeUse", true);
-
-        if (isFirstTimeUse) {
-            //show knowledge 1 for welcome
-            knowledge_one_dialog = new Dialog(MainActivity.this);
-            knowledge_one_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            knowledge_one_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            knowledge_one_dialog.setCancelable(false);
-            knowledge_one_dialog.setContentView(R.layout.dialog_knowledge_one);
-
-            Button gotIt = knowledge_one_dialog.findViewById(R.id.buttonGotIt);
-
-            gotIt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //dismiss first dialog
-                    knowledge_one_dialog.dismiss();
-                    //show next dialog for knowledge
-                    knowledge_two_dialog = new Dialog(MainActivity.this);
-                    knowledge_two_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    knowledge_two_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    knowledge_two_dialog.setCancelable(false);
-                    knowledge_two_dialog.setContentView(R.layout.dialog_knowledge_two);
-
-                    Button gotIt = knowledge_two_dialog.findViewById(R.id.buttonGotIt);
-
-                    gotIt.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            // dismiss first dialog
-                            knowledge_two_dialog.dismiss();
-                            //show next dialog for knowledge
-                            knowledge_three_dialog = new Dialog(MainActivity.this);
-                            knowledge_three_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                            knowledge_three_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                            knowledge_three_dialog.setCancelable(false);
-                            knowledge_three_dialog.setContentView(R.layout.dialog_knowledge_three);
-
-                            Button gotIt = knowledge_three_dialog.findViewById(R.id.buttonGotIt);
-
-                            gotIt.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    //exit dialogs to continue using app
-                                    //save knowledge session for user
-                                    SharedPreferences getSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-                                    SharedPreferences.Editor e = getSharedPreferences.edit();
-                                    e.putBoolean("firstTimeUse", false);
-                                    e.apply();
-                                    knowledge_three_dialog.dismiss();
-                                }
-                            });
-
-                            knowledge_three_dialog.show(); //don't forget to dismiss the dialog when done loading
-                        }
-                    });
-
-                    knowledge_two_dialog.show(); //don't forget to dismiss the dialog when done loading
-                }
-            });
-
-            knowledge_one_dialog.show(); //don't forget to dismiss the dialog when done loading
-        }
-    }
 
     private void showDialogSuccess() {
         withdraw_dialog.dismiss();
