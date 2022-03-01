@@ -34,8 +34,10 @@ public class Utils {
             for (int i = 0; i < array.length(); i++) {
                 Questions facts = gson.fromJson(array.getString(i), Questions.class);
                 questionList.add(facts);
-                Collections.shuffle(questionList); //shuffle the cards each time when loaded
             }
+
+            //shuffle the cards each time when loaded
+            Collections.shuffle(questionList);
 
             return questionList;
         } catch (Exception e) {

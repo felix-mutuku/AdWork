@@ -76,6 +76,8 @@ public class MainActivity2 extends AppCompatActivity {
             public void onClick(View v) {
                 //check internet
                 Constants.checkInternet(MainActivity2.this);
+                //reset swipeView
+                mSwipeView.removeAllViews();
                 //shuffle cards
                 for (Questions questions : Utils.loadFacts(getApplicationContext())) {
                     mSwipeView.addView(new QuestionsCard(mContext, questions, mSwipeView,
