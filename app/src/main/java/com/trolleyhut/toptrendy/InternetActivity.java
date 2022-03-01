@@ -1,9 +1,7 @@
 package com.trolleyhut.toptrendy;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -52,6 +50,8 @@ public class InternetActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //close dialog
                 warning_dialog.dismiss();
+                //remove one point
+                Constants.deductAPoint(InternetActivity.this);
             }
         });
 
