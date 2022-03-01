@@ -1,7 +1,5 @@
 package com.trolleyhut.toptrendy;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +13,10 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -33,8 +34,9 @@ public class ProfileActivity extends AppCompatActivity {
             adsSkipped, totalStreaks, totalWithdrawals, deleteAccount;
     Button buttonWithdraw;
     String SuserName, SuserEmail, SuserDateJoined, SestEarnings, SfactsSeen, SadsWatched,
-            SadsSkipped, StotalStreaks, StotalWithdrawals, Spoints, SpointsLifeTime, SpointsDeducted;
+            SadsSkipped, StotalWithdrawals, Spoints, SpointsLifeTime, SpointsDeducted, StotalStreaks;
     Dialog withdraw_dialog, delete_dialog, warning_dialog;
+    ImageView back, share;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,8 @@ public class ProfileActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
+        share = findViewById(R.id.share);
+        back = findViewById(R.id.back);
         userName = findViewById(R.id.userName);
         userEmail = findViewById(R.id.userEmail);
         userDateJoined = findViewById(R.id.userDateJoined);
@@ -90,6 +94,34 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //go back
+                onBackPressed();
+            }
+        });
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //share app with others
+                try {
+                    Intent i = new Intent(Intent.ACTION_SEND);
+                    i.setType("text/plain");
+                    i.putExtra(Intent.EXTRA_SUBJECT, "AdWork App");
+                    String sAux = "\nThis App let's you earn money by rating facts True or False\n\n" +
+                            "Download today and earn a living online!\n\n";
+                    sAux = sAux + "http://play.google.com/store/apps/details?id=com.trolleyhut.toptrendy";
+                    i.putExtra(Intent.EXTRA_TEXT, sAux);
+                    startActivity(Intent.createChooser(i, "choose one"));
+                } catch (Exception e) {
+                    //show toast
+                    Constants.showToast("Please Try Again Later :(", ProfileActivity.this);
+                }
+            }
+        });
+
         //get information needed for calculations
         getUserInfoFromPreferences();
 
@@ -107,11 +139,13 @@ public class ProfileActivity extends AppCompatActivity {
         SfactsSeen = sharedPreferences.getString(Constants.PREF_FACTS_SEEN, "0");
         SadsWatched = sharedPreferences.getString(Constants.PREF_ADS_WATCHED, "0");
         SadsSkipped = sharedPreferences.getString(Constants.PREF_ADS_SKIPPED, "0");
-        StotalStreaks = sharedPreferences.getString(Constants.PREF_TOTAL_STREAKS, "0");
+        //StotalStreaks = sharedPreferences.getString(Constants.PREF_TOTAL_STREAKS, "0");
         StotalWithdrawals = sharedPreferences.getString(Constants.PREF_TOTAL_WITHDRAWALS, "0");
         Spoints = sharedPreferences.getString(Constants.PREF_POINTS, "0");
         SpointsLifeTime = sharedPreferences.getString(Constants.PREF_POINTS_LIFETIME, "0");
         SpointsDeducted = sharedPreferences.getString(Constants.PREF_POINTS_DEDUCTED, "0");
+
+        StotalStreaks = String.valueOf(ConsecutiveDayChecker.getStreak(ProfileActivity.this));
 
         //check if login is okay
         if (SuserName.equals("N/A")) {
@@ -246,7 +280,7 @@ public class ProfileActivity extends AppCompatActivity {
         editor.putString(Constants.PREF_ADS_WATCHED, "0");
         editor.putString(Constants.PREF_ADS_SKIPPED, "0");
         editor.putString(Constants.PREF_FACTS_SEEN, "0");
-        editor.putString(Constants.PREF_TOTAL_STREAKS, "0");
+        //editor.putString(Constants.PREF_TOTAL_STREAKS, "0");
         editor.putString(Constants.PREF_TOTAL_WITHDRAWALS, "0");
         editor.apply();
 

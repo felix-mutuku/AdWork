@@ -1,22 +1,582 @@
 [
   {
-    "question": "Question 1",
+    "question": "Kanye West once spontaneously rapped his entire album to Seth Rogen in the back of a limousine while he sat in disbelief. It took him two hours",
     "description": ""
   },
   {
-    "question": "Question 2",
+    "question": "In 2018, a 60 year-old Argentinian man legally changed his name from Sergio to Sergia, so he could identify as a woman and retire 5 years early. Argentine law allows women to retire at 60, while men have to wait until they are 65",
     "description": ""
   },
   {
-    "question": "Question 3",
+    "question": "In Russia, a security guard ruined a painting worth $1 million by drawing a pair of eyes on it with a ballpoint pen because he was 'bored'. It was his first day on the job",
     "description": ""
   },
   {
-    "question": "Question 4",
+    "question": "Hitler’s plan for Moscow was to wipe out the entire human population of 4 million, destroy the city and then replace it with a lake",
     "description": ""
   },
   {
-    "question": "Question 5",
+    "question": "Ernest Hemingway survived malaria, pneumonia, anthrax, skin cancer, dysentery, anemia, hepatitis, diabetes, two plane crashes, a ruptured kidney, a ruptured liver, a ruptured spleen, a fractured skull, and a crushed vertebra",
+    "description": ""
+  },
+  {
+    "question": "In 1980, the FBI formed a fake company and attempted to bribe members of congress. Almost 25% of those tested accepted the bribe and were convicted",
+    "description": ""
+  },
+  {
+    "question": "In 2011, Russell Brand ended his marriage to Katy Perry with a single text message and has never spoken to her since",
+    "description": ""
+  },
+  {
+    "question": "French was the official language of England for around 300 years",
+    "description": ""
+  },
+  {
+    "question": "Humans have more outrage for violence against cats and dogs than they do for other humans, studies show",
+    "description": ""
+  },
+  {
+    "question": "Diego, the Hood Island Tortoise, is credited with single handedly saving his entire species from extinction by impregnating around 900 females during a breeding program on Santa Cruz island (Galápagos). He's since been released into the wild",
+    "description": ""
+  },
+  {
+    "question": "In 1932, the Australian Army went to war against a mob of emus that were destroying farmland. The Army lost",
+    "description": ""
+  },
+  {
+    "question": "In 1976, Bob Marley was shot by an unknown gunman 2 days before a concert to ease tensions in Jamaica. Despite his injuries, he still went on to play stating: 'The people who are trying to make this world worse aren't taking a day off. How can I?'",
+    "description": ""
+  },
+  {
+    "question": "Prince Charles has been the first in line to the throne since 1952, 70 years and counting",
+    "description": ""
+  },
+  {
+    "question": "In 2018, a criminal came up with a master plan to paint his entire face green to avoid being identified while pick-pocketing in Russia. However, the 23-year-old man was swiftly identified and arrested due to being the only person in the vicinity with a green face",
+    "description": ""
+  },
+  {
+    "question": "Spending time with people who constantly complain can not only give you a headache, it can physically shrink your brain",
+    "description": ""
+  },
+  {
+    "question": "In India, some parents celebrate the birth of their new born baby by throwing it off a building from a great height",
+    "description": ""
+  },
+  {
+    "question": "Venting your anger online actually works in the short term, but only makes you angrier over time",
+    "description": ""
+  },
+  {
+    "question": "In China, some car parks have 'Women Only' parking spaces which are up to 50% wider than the other spaces available",
+    "description": ""
+  },
+  {
+    "question": "Jackie Chan plans to leave none of his estimated $400 million fortune to his only son, Jaycee, and will donate it all to charity instead. 'If he is capable, he can make his own money. If he is not, then he will just be wasting mine' Chan explained",
+    "description": ""
+  },
+  {
+    "question": "In 1963, a Turkish man renovating his home knocked down a wall in the basement and uncovered a mysterious tunnel. He followed the tunnel which led him to a hidden ancient underground city (Derinkuyu). The city once homed up to 20,000 people",
+    "description": ""
+  },
+  {
+    "question": "In 2006, a man in Portland, Oregon hired a hitman to kill his wife. However, the plot took an unexpected turn when his wife ended up killing the hitman instead, using nothing but her bare hands",
+    "description": ""
+  },
+  {
+    "question": "Amou Haji aka 'The Dirtiest Man on the Planet', lives in the Iranian desert, hasn't had a bath or shower in over 65 years and lives on a diet of raw animal meat and a pack of cigarettes a day. At 87-years-old, he claims to be 'happy and healthy'",
+    "description": ""
+  },
+  {
+    "question": "Ants can't die from falling",
+    "description": ""
+  },
+  {
+    "question": "Cats evolved to manipulate humans with meows that sound like crying babies",
+    "description": ""
+  },
+  {
+    "question": "In Japan, napping at work is honorable and seen as a sign of diligence",
+    "description": ""
+  },
+  {
+    "question": "People who stay up late at night are more likely to be psychopaths than those who go to bed early",
+    "description": ""
+  },
+  {
+    "question": "In 1962, a man from Yorkshire, England, Brendon Grimshaw, purchased Moyenne Island off Seychelles for £8,000 and became its sole inhabitant. He transformed it, planting 16,000 trees and introduced various animal life to the island. He lived there until his death in 2012",
+    "description": ""
+  },
+  {
+    "question": "Size matters in the world of Proboscis Monkeys. The bigger the nose a male has, the more females he is likely to attract",
+    "description": ""
+  },
+  {
+    "question": "Vladimir Putin is a black belt in Judo and a holder of the 9th-degree taekwondo black belt, one level above Chuck Norris",
+    "description": ""
+  },
+  {
+    "question": "Gary Kremen, the founder of http://match.com, lost his girlfriend to a man she met on http://match.com",
+    "description": ""
+  },
+  {
+    "question": "In 2005, a glass company set up a bullet-proof glass poster case containing $3 million at a bus stop in Vancouver, Canada. If anyone was able to break the glass they got to keep the cash. Nobody succeeded, despite plenty trying",
+    "description": ""
+  },
+  {
+    "question": "Eating ice cream when you're sad has been scientifically proven to reduce emotional pain",
+    "description": ""
+  },
+  {
+    "question": "In 2018, a woman in Crimea stole 70,000 rubles from a fortune-teller who had predicted that she would come into some money soon",
+    "description": ""
+  },
+  {
+    "question": "Waking up with “morning wood” is a sign of good penile health",
+    "description": ""
+  },
+  {
+    "question": "China only has 1 time zone. France has 12",
+    "description": ""
+  },
+  {
+    "question": "In 2016, former NASA astronaut Scott Kelly smuggled a full gorilla suit onboard the International Space Station but didn't tell anyone about it. Until one day, he decided to put it on and crept up on his fellow crew members",
+    "description": ""
+  },
+  {
+    "question": "In the Netherlands, Dutch police discovered a man hiding in the wheel section of a plane that landed in Amsterdam. He'd been there for 11 hours and had flown all the way from Johannesburg via Kenya",
+    "description": ""
+  },
+  {
+    "question": "Marijuana is illegal but has never caused any deaths from usage. Cigarettes are legal but kill over 8 million people a year",
+    "description": ""
+  },
+  {
+    "question": "China has the most billionaires in the world. But there are 4 times as many millionaires in the US",
+    "description": ""
+  },
+  {
+    "question": "Pandas don't have specific spots for sleeping, they simply fall asleep wherever they happen to be",
+    "description": ""
+  },
+  {
+    "question": "Male porcupines urinate on females before mating",
+    "description": ""
+  },
+  {
+    "question": "In 2008, an anti-kidnapping expert in mexico was kidnapped, after giving a lecture on how not to be kidnapped in Mexico",
+    "description": ""
+  },
+  {
+    "question": "In 2012, a missing woman in Iceland was found when it was discovered she was in the search party looking for herself",
+    "description": ""
+  },
+  {
+    "question": "In the 1990s, Dolly Parton began rewarding students $500 cash for successfully graduating high school in Sevier County, Tennessee. Within years, the dropout rate decreased from 35% down to 6% in the area",
+    "description": ""
+  },
+  {
+    "question": "There are around 31 empty houses for every homeless person in the US",
+    "description": ""
+  },
+  {
+    "question": "More bank robberies occur in Italy than the rest of Europe combined",
+    "description": ""
+  },
+  {
+    "question": "French fries aren't even French, they're from Belgium",
+    "description": ""
+  },
+  {
+    "question": "In Australia, lives a bird that deliberately spreads wildfires. The black kites aka 'Firehawks' spread fire by carrying burning sticks to new locations in their beaks",
+    "description": ""
+  },
+  {
+    "question": "Leonardo DiCaprio claims to have never done drugs and had to be taught what being high felt like by drug experts",
+    "description": ""
+  },
+  {
+    "question": "In 2020 #Eminem broke the record for fastest ever rap during his hit single 'Godzilla' when he rapped 225 words in 30 seconds. That's 7.5 words per second",
+    "description": ""
+  },
+  {
+    "question": "Just a 15 minute daily walk can improve your mood, lower blood pressure, and boost your brain's performance by over 50%",
+    "description": ""
+  },
+  {
+    "question": "Laziness can be a sign of superior intelligence",
+    "description": ""
+  },
+  {
+    "question": "Male koalas are one of the laziest animals on earth, sleeping up to 22 hours a day. Even when it comes to mating, they don't leave their home. Instead, often between 12-3 in the morning, they'll 'bellow' out a mating call and make the female come to them",
+    "description": ""
+  },
+  {
+    "question": "There is an abandoned ghost village in Turkey known as 'The Burj Al Babas'. The village is home to 587 unoccupied castles that look straight out of a Disney movie",
+    "description": ""
+  },
+  {
+    "question": "In 1961, during an expedition to the Antarctic, a Russian doctor named Leonid Rogozov became seriously ill with acute appendicitis. He needed surgery as fast as possible but was the only doctor on the team, so he went ahead by himself and cut out his own appendix",
+    "description": ""
+  },
+  {
+    "question": "First born children tend to have a higher IQ than their siblings. Second borns tend to be more rebellious",
+    "description": ""
+  },
+  {
+    "question": "Male hedgehogs commonly have a habit of chronic masturbation",
+    "description": ""
+  },
+  {
+    "question": "Baby elephants don't learn to control their trunks until they’re around a year old",
+    "description": ""
+  },
+  {
+    "question": "The largest meteorite on earth is a 60 tonnes monster named Hoba. It is located in Namibia, and has never been moved",
+    "description": ""
+  },
+  {
+    "question": "Ulm, a city in Germany, has sleeping pods located in and around the city for homeless people. When one is activated, a social worker visits them in the morning to make sure they're ok",
+    "description": ""
+  },
+  {
+    "question": "In 1993, a Frenchman named Emile Leray driving a Citroen car in a remote area of the Moroccan desert had a breakdown and became stranded. To survive, he tore down the car, built a motorcycle from the parts and then rode it back to civilization",
+    "description": ""
+  },
+  {
+    "question": "In 2012, the Olympic Committee in Kuwait accidentally played the fictional Kazakhstan national anthem from Borat at a medal ceremony rather than Kazakhstan's actual national anthem",
+    "description": ""
+  },
+  {
+    "question": "Scotland is the only country in the world that provides free sanitary products to women of all ages",
+    "description": ""
+  },
+  {
+    "question": "In Ontario, Canada, you can order weed on Uber Eats",
+    "description": ""
+  },
+  {
+    "question": "Some females can reach orgasm via stimulation of their knees",
+    "description": ""
+  },
+  {
+    "question": "Sir Isaac Newton, one of the greatest scientists to ever live, once said: 'I consider my greatest accomplishment to be lifelong celibacy'",
+    "description": ""
+  },
+  {
+    "question": "In 2014, a Russian man attempted to rob a hair salon. However, the plot took an unexpected turn when Olga Zajac, the owner of the salon, overpowered him and tied him up. She then force-fed him Viagra and used him as a sex slave for 3 days",
+    "description": ""
+  },
+  {
+    "question": "Eating a mango 1-2 hours before smoking a joint boosts the high from marijuana",
+    "description": ""
+  },
+  {
+    "question": "Dogs sometimes fake injuries and illnesses just to get extra attention and treats",
+    "description": ""
+  },
+  {
+    "question": "Stroking a cat is good for your health. Just 10 minutes petting a cat can reduce stress, lower blood pressure and boost your overall psychological state",
+    "description": ""
+  },
+  {
+    "question": "When we reach the age of 23, we begin to smile less, laugh less and naturally become a more serious person. This is known as the 'Humor Cliff'",
+    "description": ""
+  },
+  {
+    "question": "In the 1990s, a California man, Steve Comisar, began putting ads in national magazines selling 'Solar- powered dryers' for $49.95. Customers would then receive a simple clothesline in the mail",
+    "description": ""
+  },
+  {
+    "question": "In 2013, the 'Breaking Bad' team were offered $75 million to produce 3 more episodes after the final season concluded, which was estimated to be more than their earnings in 5 years. They declined",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
+    "description": ""
+  },
+  {
+    "question": "",
     "description": ""
   }
 ]

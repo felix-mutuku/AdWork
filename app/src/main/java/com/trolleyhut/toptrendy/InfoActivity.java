@@ -1,8 +1,5 @@
 package com.trolleyhut.toptrendy;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +11,9 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 public class InfoActivity extends AppCompatActivity {
     ImageView back, share;
@@ -56,8 +56,8 @@ public class InfoActivity extends AppCompatActivity {
                     Intent i = new Intent(Intent.ACTION_SEND);
                     i.setType("text/plain");
                     i.putExtra(Intent.EXTRA_SUBJECT, "AdWork App");
-                    String sAux = "\nAdWork App let's you earn money by rating facts from around the world\n\n" +
-                            "Download AdWork today and earn a living online!\n\n";
+                    String sAux = "\nThis App let's you earn money by rating facts True or False\n\n" +
+                            "Download today and earn a living online!\n\n";
                     sAux = sAux + "http://play.google.com/store/apps/details?id=com.trolleyhut.toptrendy";
                     i.putExtra(Intent.EXTRA_TEXT, sAux);
                     startActivity(Intent.createChooser(i, "choose one"));

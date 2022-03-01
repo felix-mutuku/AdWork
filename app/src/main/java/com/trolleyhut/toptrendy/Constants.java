@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
@@ -19,20 +20,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.OnUserEarnedRewardListener;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 public class Constants {
     public static final String BASE_URL_LOGIC = "";
@@ -40,6 +51,9 @@ public class Constants {
     public static int warning_points = 380; //one point is $0.05 or Ksh5
     public static int max_points = 400; //one point is $0.05 or Ksh5
     public static Dialog loadingDialog;
+    public static Dialog current_estimate_dialog;
+    public static RewardedAd mRewardedAd;
+    public static InterstitialAd mInterstitialAd;
 
     //saving a user's personal data in shared preferences
     public static final String SHARED_PREF_NAME = "AdWork_pref";
@@ -53,7 +67,7 @@ public class Constants {
     public static final String PREF_ADS_WATCHED = "adwork_ads_watched";
     public static final String PREF_ADS_SKIPPED = "adwork_ads_skipped";
     public static final String PREF_FACTS_SEEN = "adwork_facts_seen";
-    public static final String PREF_TOTAL_STREAKS = "adwork_total_streaks";
+    //public static final String PREF_TOTAL_STREAKS = "adwork_total_streaks";
     public static final String PREF_TOTAL_WITHDRAWALS = "adwork_total_withdrawals";
 
     //app tokens
@@ -66,6 +80,10 @@ public class Constants {
     //Firebase database names
     public static final String FIREBASE_REGISTERED_USERS = "AdWorkRegisteredUsers";
 
+    //Notification data
+    public static final String NOTIFICATION_TITLE = "AdWork - make money online";
+    public static final String NOTIFICATION_CONTENT = "Keep the streak going! Continue making money online by rating some more facts";
+    public static final String NOTIFICATION_CHANNEL_NAME = "ADWORK_CHANNEL_NAME";
 
     //display toast to user
     public static void showToast(String s, Activity a) {
@@ -140,57 +158,79 @@ public class Constants {
         SharedPreferences sharedPreferences = a.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         String Spoints = sharedPreferences.getString(PREF_POINTS, "0");
         String SpointsLifetime = sharedPreferences.getString(PREF_POINTS_LIFETIME, "0");
+        String SfactSeen = sharedPreferences.getString(PREF_FACTS_SEEN, "0");
         //change string points to integer for calculations
         int Ipoints = Integer.parseInt(Spoints);
         int IpointsLifetime = Integer.parseInt(SpointsLifetime);
+        int IfactSeen = Integer.parseInt(SfactSeen);
 
         //add a point for user
         Ipoints = Ipoints + 1;
         IpointsLifetime = IpointsLifetime + 1;
+        IfactSeen = IfactSeen + 1;
 
         //is user has more than 380 points
-        if (Ipoints > warning_points) {
-            addPointsDataToFirebase(a);
-        }
+//        if (Ipoints > warning_points) {
+//            addPointsDataToFirebase(a);
+//        }
 
         //store points back to shared preference for future reference
         Spoints = String.valueOf(Ipoints);
         SpointsLifetime = String.valueOf(IpointsLifetime);
+        SfactSeen = String.valueOf(IfactSeen);
         //add to shared preferences
         sharedPreferences = a.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(PREF_POINTS, Spoints);
         editor.putString(PREF_POINTS_LIFETIME, SpointsLifetime);
+        editor.putString(PREF_FACTS_SEEN, SfactSeen);
         editor.apply();
+
+        //show estimate dialog
+        showEstimateDialog(a);
+
+        //show reward ad to user
+        showRewardAd(a);
     }
 
     public static void addTwoPoints(Activity a) {
+        //close estimate dialog
+        current_estimate_dialog.dismiss();
+
         //addPoints
         SharedPreferences sharedPreferences = a.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         String Spoints = sharedPreferences.getString(PREF_POINTS, "0");
         String SpointsLifetime = sharedPreferences.getString(PREF_POINTS_LIFETIME, "0");
+        String SadWatched = sharedPreferences.getString(PREF_ADS_WATCHED, "0");
         //change string points to integer for calculations
         int Ipoints = Integer.parseInt(Spoints);
         int IpointsLifetime = Integer.parseInt(SpointsLifetime);
+        int IadWatched = Integer.parseInt(SadWatched);
 
         //add a point for user
         Ipoints = Ipoints + 2;
         IpointsLifetime = IpointsLifetime + 2;
+        IadWatched = IadWatched + 1;
 
         //is user has more than 380 points
-        if (Ipoints > warning_points) {
-            addPointsDataToFirebase(a);
-        }
+//        if (Ipoints > warning_points) {
+//            addPointsDataToFirebase(a);
+//        }
 
         //store points back to shared preference for future reference
         Spoints = String.valueOf(Ipoints);
         SpointsLifetime = String.valueOf(IpointsLifetime);
+        SadWatched = String.valueOf(IadWatched);
         //add to shared preferences
         sharedPreferences = a.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(PREF_POINTS, Spoints);
         editor.putString(PREF_POINTS_LIFETIME, SpointsLifetime);
+        editor.putString(PREF_ADS_WATCHED, SadWatched);
         editor.apply();
+
+        //show estimate dialog again
+        showEstimateDialog(a);
     }
 
     public static void showEstimateDialog(Activity a) {
@@ -210,7 +250,7 @@ public class Constants {
         editor.apply();
 
         //show next dialog for knowledge
-        Dialog current_estimate_dialog = new Dialog(a);
+        current_estimate_dialog = new Dialog(a);
         current_estimate_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         current_estimate_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         current_estimate_dialog.setCancelable(false);
@@ -218,11 +258,31 @@ public class Constants {
 
         Button okay = current_estimate_dialog.findViewById(R.id.okay);
         TextView user_estimate = current_estimate_dialog.findViewById(R.id.user_estimate);
+        TextView countdown_txt = current_estimate_dialog.findViewById(R.id.countdown_txt);
+        LinearLayout countdown_linear = current_estimate_dialog.findViewById(R.id.countdown_linear);
 
         //show user how much money they have earned so far
         user_estimate.setText("Dear, " + Susername + ",\n" +
                 "Your current estimated earnings are $" + Docash + "\n\n" +
                 "You can watch the Ads to earn more");
+
+        //Declare timer
+        CountDownTimer cTimer = null;
+        //start timer function
+        cTimer = new CountDownTimer(6000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                //show something maybe
+                countdown_txt.setText("" + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                //hide countdown timer
+                countdown_linear.setVisibility(View.GONE);
+                //display button
+                okay.setVisibility(View.VISIBLE);
+            }
+        };
+        cTimer.start();
 
         okay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -235,84 +295,22 @@ public class Constants {
         current_estimate_dialog.show();
     }
 
-    public static void addPointsDataToFirebase(Activity a) {
+    public static void adSkipped(Activity a) {
         SharedPreferences sharedPreferences = a.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        String Spoints = sharedPreferences.getString(PREF_POINTS, "0");
-        String SpointsLifetime = sharedPreferences.getString(PREF_POINTS_LIFETIME, "0");
-        String Susername = sharedPreferences.getString(PREF_USERNAME, "N/A");
-        String Semail = sharedPreferences.getString(PREF_EMAIL, "N/A");
-        //calculate current date and time
-        String dateNow = new SimpleDateFormat("dd-MM-yyy", Locale.getDefault()).format(new Date());
-        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
-        String date = dateNow + " - " + currentTime;
+        String SadSkipped = sharedPreferences.getString(PREF_ADS_SKIPPED, "0");
+        //change string points to integer for calculations
+        int IadSkipped = Integer.parseInt(SadSkipped);
 
-        // Variables for Firebase Database.
-        FirebaseDatabase firebaseDatabase;
-        // creating a variable for our Database
-        // Reference for Firebase.
-        DatabaseReference databaseReferencePoints;
-        // creating a variable for
-        // our object class
-        UserPointsData userPointsData;
+        //add a point for user
+        IadSkipped = IadSkipped + 1;
 
-        // below line is used to get the
-        // instance of our Firebase database.
-        firebaseDatabase = FirebaseDatabase.getInstance();
-
-        // below line is used to get reference for our database.
-        // for user ratings
-        databaseReferencePoints = firebaseDatabase.getReference();
-        databaseReferencePoints = databaseReferencePoints.child("UsersPointsUp380").push();
-
-        // initializing our object
-        // class variable.
-        userPointsData = new UserPointsData();
-
-//        UserPointsData.setUserName(Susername);
-//        UserPointsData.setUserEmail(Semail);
-//        UserPointsData.setUserPoints(Spoints);
-//        UserPointsData.setUserPointsLifetime(SpointsLifetime);
-//        UserPointsData.setUserDate(date);
-
-        // we are use add value event listener method
-        // which is called with database reference.
-        DatabaseReference finalDatabaseReferencePoints = databaseReferencePoints;
-        databaseReferencePoints.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // inside the method of on Data change we are setting
-                // our object class to our database reference.
-                // data base reference will sends data to firebase.
-                finalDatabaseReferencePoints.setValue(userPointsData);
-
-                // after adding this data we are showing toast message.
-                //Constants.showToast("Rating Submitted !", MainActivity.this);
-                //Toast.makeText(MainActivity.this, "data added", Toast.LENGTH_SHORT).show();
-
-                //make UI usable again
-                //rating_dialog.dismiss();
-                //loading.setVisibility(View.INVISIBLE);
-                //linear_login.setVisibility(View.VISIBLE);
-                //adError.setVisibility(View.INVISIBLE);
-                //loading_dialog.dismiss();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // if the data is not added or it is cancelled then
-                // we are displaying a failure toast message.
-                //Constants.showToast("Failed ! Please Try Again", a);
-                Log.e("FIREBASE POINTS >>>", String.valueOf(error));
-                //Toast.makeText(MainActivity.this, "Fail to add data " + error, Toast.LENGTH_SHORT).show();
-
-                //make UI usable
-                //loading.setVisibility(View.INVISIBLE);
-                //linear_login.setVisibility(View.VISIBLE);
-                //adError.setVisibility(View.INVISIBLE);
-                //loading_dialog.dismiss();
-            }
-        });
-
+        //store points back to shared preference for future reference
+        SadSkipped = String.valueOf(IadSkipped);
+        //add to shared preferences
+        sharedPreferences = a.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(PREF_ADS_SKIPPED, SadSkipped);
+        editor.apply();
     }
 
     public static void addRegistrationDataToFirebase(Activity a, String userName, String userEmail,
@@ -509,6 +507,158 @@ public class Constants {
         });
 
         withdraw_success_dialog.show();
+    }
+
+    public static void showRewardAd(Activity a) {
+        //show full screen reward ad
+        final String TAG = "MainActivity";
+        //Sample AD UNIT ID: ca-app-pub-3940256099942544/5224354917
+        //REAL AD UNIT ID: ca-app-pub-5123885596101098/3933992145
+        String AD_UNIT_ID_REWARD = "ca-app-pub-5123885596101098/3933992145";
+
+        //initialize mobile ads
+        MobileAds.initialize(a, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+                //show initialization status
+                Log.e("ADS INITIALIZATION >>>", String.valueOf(initializationStatus));
+            }
+        });
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        RewardedAd.load(a, AD_UNIT_ID_REWARD, adRequest,
+                new RewardedAdLoadCallback() {
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error.
+                        Log.e(TAG, loadAdError.getMessage());
+                        mRewardedAd = null;
+                        //show user ful screen ad
+                        showFullScreenAd(a);
+                    }
+
+                    @Override
+                    public void onAdLoaded(@NonNull RewardedAd rewardedAd) {
+                        mRewardedAd = rewardedAd;
+                        Log.e(TAG, "Ad was loaded.");
+                    }
+
+                });
+
+        mRewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+            @Override
+            public void onAdShowedFullScreenContent() {
+                // Called when ad is shown.
+                Log.d(TAG, "Ad was shown.");
+            }
+
+            @Override
+            public void onAdFailedToShowFullScreenContent(AdError adError) {
+                // Called when ad fails to show.
+                Log.d(TAG, "Ad failed to show.");
+            }
+
+            @Override
+            public void onAdDismissedFullScreenContent() {
+                // Called when ad is dismissed.
+                // Set the ad reference to null so you don't show the ad a second time.
+                adSkipped(a);
+                Log.d(TAG, "Ad was dismissed.");
+                mRewardedAd = null;
+            }
+        });
+
+        //show reward ad
+        if (mRewardedAd != null) {
+            Activity activityContext = a;
+            mRewardedAd.show(activityContext, new OnUserEarnedRewardListener() {
+                @Override
+                public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                    // Handle the reward.
+                    Log.d(TAG, "The user earned the reward.");
+                    int rewardAmount = rewardItem.getAmount();
+                    String rewardType = rewardItem.getType();
+
+                    Log.e("rewardAmount>>", String.valueOf(rewardAmount));
+                    Log.e("rewardType >>>", rewardType);
+
+                    //add two points to the user
+                    addTwoPoints(a);
+                }
+            });
+        } else {
+            //Constants.showToast("Please try again later", MainActivity.this);
+            Log.d(TAG, "The rewarded ad wasn't ready yet.");
+            //show user full screen ad
+            showFullScreenAd(a);
+        }
+
+    }
+
+    public static void showFullScreenAd(Activity a) {
+        //Sample AD UNIT ID: ca-app-pub-3940256099942544/1033173712
+        //REAL AD UNIT ID: ca-app-pub-5123885596101098/7264792098
+        String AD_UNIT_ID_FUll_SCREEN = "ca-app-pub-5123885596101098/7264792098";
+        final String TAG = "MainActivity";
+
+        //initialize mobile ads
+        MobileAds.initialize(a, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+                //show initialization status
+                Log.e("ADS INITIALIZATION >>>", String.valueOf(initializationStatus));
+            }
+        });
+
+        //show interstitial ad
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        InterstitialAd.load(a, AD_UNIT_ID_FUll_SCREEN, adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
+                        mInterstitialAd = interstitialAd;
+                        Log.i(TAG, "onAdLoadedFullScreen");
+
+                        mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                            @Override
+                            public void onAdDismissedFullScreenContent() {
+                                // Called when fullscreen content is dismissed.
+                                Log.d("TAG", "The ad was dismissed.");
+                                adSkipped(a);
+                            }
+
+                            @Override
+                            public void onAdFailedToShowFullScreenContent(AdError adErrorr) {
+                                // Called when fullscreen content failed to show.
+                                Log.d("TAG", "The ad failed to show.");
+
+                            }
+
+                            @Override
+                            public void onAdShowedFullScreenContent() {
+                                // Called when fullscreen content is shown.
+                                // Make sure to set your reference to null so you don't
+                                // show it a second time.
+                                mInterstitialAd = null;
+                                Log.d("TAG", "The ad was shown.");
+
+                                //add two points
+                                Constants.addTwoPoints(a);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+                        Log.i(TAG, loadAdError.getMessage());
+                        mInterstitialAd = null;
+                    }
+                });
     }
 
     public static void showLoadingDialog(Activity a) {

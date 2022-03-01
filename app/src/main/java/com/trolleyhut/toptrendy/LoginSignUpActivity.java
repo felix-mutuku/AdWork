@@ -160,6 +160,7 @@ public class LoginSignUpActivity extends AppCompatActivity {
             String dateNow = new SimpleDateFormat("dd-MM-yyy", Locale.getDefault()).format(new Date());
             String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
             String date = dateNow + " - " + currentTime;
+            date_joined = dateNow;
             //add data to shared preferences
             addInfoToSharedPreference();
             //send data to firebase

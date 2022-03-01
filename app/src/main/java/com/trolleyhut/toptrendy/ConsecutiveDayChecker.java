@@ -23,18 +23,18 @@ public class ConsecutiveDayChecker {
 
         if (lastLoginDay == null) {
             // user logged in for the first time
-            updateLastLoginDate(today);
+            updateLastLoginDate(today, a);
             incrementDays(a);
         } else {
             if (lastLoginDay.equals(today)) {
                 // User logged in the same day , do nothing
             } else if (lastLoginDay.equals(yesterday)) {
                 // User logged in consecutive days , add 1
-                updateLastLoginDate(today);
+                updateLastLoginDate(today, a);
                 incrementDays(a);
             } else {
                 // It's been more than a day user logged in, reset the counter to 1
-                updateLastLoginDate(today);
+                updateLastLoginDate(today, a);
                 resetDays(a);
             }
         }
@@ -49,50 +49,53 @@ public class ConsecutiveDayChecker {
 
     /**
      * Update last login date into the storage
+     *
      * @param date
      */
-    private static void updateLastLoginDate(String date) {
-        // SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        // SharedPreferences.Editor editor = sharedPref.edit();
-        // editor.putString("last_login_day", date);
-        // editor.apply();
+    private static void updateLastLoginDate(String date, Activity a) {
+        SharedPreferences sharedPref = a.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("last_login_day", date);
+        editor.apply();
     }
 
     /**
      * Get last login date
+     *
      * @return
      */
     private static String getLastLoginDate(Activity a) {
-         String lastLogin = null;
-         SharedPreferences sharedPref = a.getPreferences(Context.MODE_PRIVATE);
-         lastLogin = sharedPref.getString("last_login_day", null);
-         return lastLogin;
+        String lastLogin = null;
+        SharedPreferences sharedPref = a.getPreferences(Context.MODE_PRIVATE);
+        lastLogin = sharedPref.getString("last_login_day", null);
+        return lastLogin;
     }
 
     private static int getConsecutiveDays(Activity a) {
-         int days = 0;
-         SharedPreferences sharedPref = a.getPreferences(Context.MODE_PRIVATE);
-         days = sharedPref.getInt("num_consecutive_days", 0);
-         return days;
+        int days = 0;
+        SharedPreferences sharedPref = a.getPreferences(Context.MODE_PRIVATE);
+        days = sharedPref.getInt("num_consecutive_days", 0);
+        return days;
     }
 
     private static void incrementDays(Activity a) {
-         int days = getConsecutiveDays(a) + 1;
-         SharedPreferences sharedPref = a.getPreferences(Context.MODE_PRIVATE);
-         SharedPreferences.Editor editor = sharedPref.edit();
-         editor.putInt("num_consecutive_days", days);
-         editor.apply();
+        int days = getConsecutiveDays(a) + 1;
+        SharedPreferences sharedPref = a.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("num_consecutive_days", days);
+        editor.apply();
     }
 
     private static void resetDays(Activity a) {
-         int days = 1;
-         SharedPreferences sharedPref = a.getPreferences(Context.MODE_PRIVATE);
-         SharedPreferences.Editor editor = sharedPref.edit();
-         editor.putInt("num_consecutive_days", days);
-         editor.apply();
+        int days = 1;
+        SharedPreferences sharedPref = a.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(Constants.PREF_POINTS, String.valueOf(days));
+        editor.putInt("num_consecutive_days", days);
+        editor.apply();
     }
 
-    public int getStreak(Activity a) {
+    public static int getStreak(Activity a) {
         return getConsecutiveDays(a);
     }
 }

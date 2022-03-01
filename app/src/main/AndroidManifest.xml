@@ -16,7 +16,9 @@
         android:theme="@style/Theme.TopTrendy">
         <activity
             android:name=".ProfileActivity"
-            android:exported="false" />
+            android:configChanges="orientation"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SplashScreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -30,11 +32,15 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+        </activity>
+
+        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
         <!-- REAL AdMob app ID: ca-app-pub-5123885596101098~9597382365 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713" />
+            android:value="ca-app-pub-5123885596101098~9597382365" />
+
+        <receiver android:name=".NotificationReceiver" />
 
         <activity
             android:name=".InternetActivity"
@@ -49,10 +55,6 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".InfoActivity"
             android:configChanges="orientation"
             android:exported="false"
@@ -63,5 +65,4 @@
             android:exported="false"
             android:screenOrientation="portrait" />
     </application>
-
 </manifest>

@@ -4,22 +4,10 @@ public class UserPointsData {
     // string variable for
     // storing user's name.
     private String userName;
-
-    // string variable for storing
-    // user's contact email
     private String userEmail;
-
-    // string variable for storing
-    // user's points
-    private String userPoints;
-
-    // string variable for storing
-    // user's points
-    private String userPointsLifetime;
-
-    // string variable for storing
-    // user's current date
     private String userDate;
+    private String userPoints;
+    private String userPointsLifetime;
 
     // an empty constructor is
     // required when using
@@ -34,9 +22,8 @@ public class UserPointsData {
         return userName;
     }
 
-    public static void setUserName(String userName) {
-        //this.userName = userName;
-        userName = userName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getUserEmail() {
@@ -45,6 +32,14 @@ public class UserPointsData {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+    }
+
+    public String getUserDate() {
+        return userDate;
+    }
+
+    public void setUserDate(String userDate) {
+        this.userDate = userDate;
     }
 
     public String getUserPoints() {
@@ -63,11 +58,4 @@ public class UserPointsData {
         this.userPointsLifetime = userPointsLifetime;
     }
 
-    public String getUserDate() {
-        return userDate;
-    }
-
-    public void setUserDate(String userDate) {
-        this.userDate = userDate;
-    }
 }
