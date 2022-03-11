@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.mindorks.placeholderview.SwipeDirection;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.mindorks.placeholderview.annotations.Click;
 import com.mindorks.placeholderview.annotations.Layout;
@@ -22,14 +23,14 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeView;
 @Layout(R.layout.question_card_view)
 public class QuestionsCard {
     @View(R.id.question)
-    private TextView questionTextView;
+    TextView questionTextView;
     @SwipeView
-    private android.view.View cardView;
+    android.view.View cardView;
 
-    private Questions mQuestions;
-    private Context mContext;
-    private SwipePlaceHolderView mSwipeView;
-    private Activity mactivity;
+    Questions mQuestions;
+    Context mContext;
+    SwipePlaceHolderView mSwipeView;
+    Activity mactivity;
 
     public QuestionsCard(Context context, Questions questions, SwipePlaceHolderView swipeView,
                          Activity activity) {
@@ -40,21 +41,13 @@ public class QuestionsCard {
     }
 
     @Resolve
-    private void onResolved() {
-
-//        MultiTransformation multi = new MultiTransformation(
-//                new BlurTransformation(mContext, 30),
-//                new RoundedCornersTransformation(
-//                        mContext, Utils.dpToPx(7), 0,
-//                        RoundedCornersTransformation.CornerType.TOP));
-        //Glide.with(mContext).load(mProfile.getImageUrl()).into(profileImageView);
-
+    public void onResolved() {
         //set data into the cards
         questionTextView.setText(mQuestions.getQuestion());
     }
 
     @SwipeOut
-    private void onSwipedOut() {
+    public void onSwipedOut() {
         //red light
         Log.e("EVENT", "onSwipedOut");
         //mSwipeView.addView(this);
@@ -67,12 +60,12 @@ public class QuestionsCard {
     }
 
     @SwipeCancelState
-    private void onSwipeCancelState() {
+    public void onSwipeCancelState() {
         Log.e("EVENT", "onSwipeCancelState");
     }
 
     @SwipeIn
-    private void onSwipeIn() {
+    public void onSwipeIn() {
         Log.e("EVENT", "onSwipedIn");
         // mSwipeView.addView(this);
 
@@ -84,7 +77,7 @@ public class QuestionsCard {
     }
 
     @SwipeInState
-    private void onSwipeInState() {
+    public void onSwipeInState() {
         Log.e("EVENT", "onSwipeInState");
     }
 
@@ -94,9 +87,9 @@ public class QuestionsCard {
     }
 
     @SwipeInDirectional
-    private void onSwipeInDirectional() {
+    public void onSwipeInDirectional(SwipeDirection direction) {
         //green light
-        Log.e("EVENT", "onSwipedInDirectional");
+        Log.e("EVENT", "SwipeInDirectional " + direction.name());
         //mSwipeView.addView(this);
 
         //check internet connection
@@ -107,9 +100,9 @@ public class QuestionsCard {
     }
 
     @SwipeOutDirectional
-    private void onSwipedOutDirectional() {
+    public void onSwipedOutDirectional(SwipeDirection direction) {
         //red light
-        Log.e("EVENT", "onSwipedOutDirectional");
+        Log.e("EVENT", "SwipeOutDirectional " + direction.name());
         //mSwipeView.addView(this);
 
         //check internet connection
@@ -120,7 +113,7 @@ public class QuestionsCard {
     }
 
     @Click(R.id.question)
-    private void onClick() {
+    public void onClick() {
         Log.e("EVENT", "question click");
     }
 

@@ -24,6 +24,7 @@ import com.mindorks.placeholderview.SwipePlaceHolderView;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 public class MainActivity2 extends AppCompatActivity {
 
@@ -66,7 +67,7 @@ public class MainActivity2 extends AppCompatActivity {
                         .setSwipeInMsgLayoutId(R.layout.swipe_in_msg_view)
                         .setSwipeOutMsgLayoutId(R.layout.swipe_out_msg_view));
 
-        for (Questions questions : Utils.loadFacts(getApplicationContext())) {
+        for (Questions questions : Objects.requireNonNull(Utils.loadFacts(getApplicationContext()))) {
             mSwipeView.addView(new QuestionsCard(mContext, questions, mSwipeView,
                     MainActivity2.this));
         }
@@ -79,7 +80,7 @@ public class MainActivity2 extends AppCompatActivity {
                 //reset swipeView
                 mSwipeView.removeAllViews();
                 //shuffle cards
-                for (Questions questions : Utils.loadFacts(getApplicationContext())) {
+                for (Questions questions : Objects.requireNonNull(Utils.loadFacts(getApplicationContext()))) {
                     mSwipeView.addView(new QuestionsCard(mContext, questions, mSwipeView,
                             MainActivity2.this));
                 }

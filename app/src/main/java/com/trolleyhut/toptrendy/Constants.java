@@ -79,6 +79,7 @@ public class Constants {
 
     //Firebase database names
     public static final String FIREBASE_REGISTERED_USERS = "AdWorkRegisteredUsers";
+    public static final String FIREBASE_WITHDRAWALS = "AdWorkWithdrawals";
 
     //Notification data
     public static final String NOTIFICATION_TITLE = "AdWork - make money online";
@@ -190,7 +191,12 @@ public class Constants {
         showEstimateDialog(a);
 
         //show reward ad to user
-        showRewardAd(a);
+        try {
+            showRewardAd(a);
+        } catch (Exception e) {
+            Log.e("ADS ERROR!", String.valueOf(e));
+        }
+
     }
 
     public static void addTwoPoints(Activity a) {
@@ -333,7 +339,7 @@ public class Constants {
         //databaseReference = firebaseDatabase.getReference("RegisteredUsers");
 
         databaseReference = firebaseDatabase.getReference();
-        databaseReference = databaseReference.child("RegisteredUsers").push();
+        databaseReference = databaseReference.child(FIREBASE_REGISTERED_USERS).push();
 
         // initializing our object
         // class variable.
@@ -410,7 +416,7 @@ public class Constants {
         //databaseReference = firebaseDatabase.getReference("RegisteredUsers");
 
         databaseReference = firebaseDatabase.getReference();
-        databaseReference = databaseReference.child("RegisteredUsers").push();
+        databaseReference = databaseReference.child(FIREBASE_WITHDRAWALS).push();
 
         // initializing our object
         // class variable.
@@ -511,40 +517,41 @@ public class Constants {
 
     public static void showRewardAd(Activity a) {
         //show full screen reward ad
-        final String TAG = "MainActivity";
+        final String TAG = "RewardedAD";
         //Sample AD UNIT ID: ca-app-pub-3940256099942544/5224354917
         //REAL AD UNIT ID: ca-app-pub-5123885596101098/3933992145
         String AD_UNIT_ID_REWARD = "ca-app-pub-5123885596101098/3933992145";
+
+        //mRewardedAd = null;
 
         //initialize mobile ads
         MobileAds.initialize(a, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
                 //show initialization status
-                Log.e("ADS INITIALIZATION >>>", String.valueOf(initializationStatus));
+                Log.e("REWARDED INITIALIZE >>>", String.valueOf(initializationStatus));
             }
         });
 
         AdRequest adRequest = new AdRequest.Builder().build();
 
-        RewardedAd.load(a, AD_UNIT_ID_REWARD, adRequest,
-                new RewardedAdLoadCallback() {
-                    @Override
-                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                        // Handle the error.
-                        Log.e(TAG, loadAdError.getMessage());
-                        mRewardedAd = null;
-                        //show user ful screen ad
-                        showFullScreenAd(a);
-                    }
+        RewardedAd.load(a, AD_UNIT_ID_REWARD, adRequest, new RewardedAdLoadCallback() {
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                // Handle the error.
+                Log.e(TAG, loadAdError.getMessage());
+                mRewardedAd = null;
+                //show user full screen ad
+                showFullScreenAd(a);
+            }
 
-                    @Override
-                    public void onAdLoaded(@NonNull RewardedAd rewardedAd) {
-                        mRewardedAd = rewardedAd;
-                        Log.e(TAG, "Ad was loaded.");
-                    }
+            @Override
+            public void onAdLoaded(@NonNull RewardedAd rewardedAd) {
+                mRewardedAd = rewardedAd;
+                Log.e(TAG, "Ad was loaded.");
+            }
 
-                });
+        });
 
         mRewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
             @Override
@@ -600,14 +607,14 @@ public class Constants {
         //Sample AD UNIT ID: ca-app-pub-3940256099942544/1033173712
         //REAL AD UNIT ID: ca-app-pub-5123885596101098/7264792098
         String AD_UNIT_ID_FUll_SCREEN = "ca-app-pub-5123885596101098/7264792098";
-        final String TAG = "MainActivity";
+        final String TAG = "FullScreenAD";
 
         //initialize mobile ads
         MobileAds.initialize(a, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
                 //show initialization status
-                Log.e("ADS INITIALIZATION >>>", String.valueOf(initializationStatus));
+                Log.e("FULLSCRN INITIALIZE >>>", String.valueOf(initializationStatus));
             }
         });
 

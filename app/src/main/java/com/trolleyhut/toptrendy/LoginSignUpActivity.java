@@ -26,7 +26,6 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.wang.avi.AVLoadingIndicatorView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,7 +34,6 @@ import java.util.Locale;
 public class LoginSignUpActivity extends AppCompatActivity {
     public boolean isLoggedin;
     LinearLayout linear_login;
-    AVLoadingIndicatorView loading;
     EditText username, user_email;
     Button buttonStart;
     String Susername;
@@ -84,7 +82,7 @@ public class LoginSignUpActivity extends AppCompatActivity {
         userRegisterData = new UserRegisterData();
 
         linear_login = findViewById(R.id.linear_login);
-        loading = findViewById(R.id.loading);
+        //loading = findViewById(R.id.loading);
         username = findViewById(R.id.username);
         user_email = findViewById(R.id.user_email);
         buttonStart = findViewById(R.id.buttonStart);
@@ -146,14 +144,14 @@ public class LoginSignUpActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(Susername)) {
             //username is empty,cancel operation
             username.setError("Choose username!");
-            loading.setVisibility(View.INVISIBLE);
+            //loading.setVisibility(View.INVISIBLE);
             linear_login.setVisibility(View.VISIBLE);
             //Constants.showToast("Please choose a username!", LoginSignUpActivity.this);
         } else if (!Semail.matches(emailPattern) || TextUtils.isEmpty(Semail)) {
             //username is okay, check if email is okay
             //email is either empty or wrongly typed, cancel  operations
             user_email.setError("Enter valid email address!");
-            loading.setVisibility(View.INVISIBLE);
+           // loading.setVisibility(View.INVISIBLE);
             linear_login.setVisibility(View.VISIBLE);
         } else {
             //calculate current date and time
